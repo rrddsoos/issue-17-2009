@@ -100,7 +100,6 @@ export const Gate = ({ children }: { children: React.ReactNode }) => {
           </motion.div>
         )}
       </AnimatePresence>
-      {unlocked && children}
     </>
   );
 };
