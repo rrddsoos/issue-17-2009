@@ -1,16 +1,41 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Loader } from "@/components/Loader";
+import { Gate } from "@/components/Gate";
+import { CustomCursor } from "@/components/CustomCursor";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import { Cover } from "@/components/Cover";
+import { EditorsNote } from "@/components/EditorsNote";
+import { MemoryTimeline } from "@/components/MemoryTimeline";
+import { Magazine } from "@/components/Magazine";
+import { Letter } from "@/components/Letter";
+import { Countdown } from "@/components/Countdown";
+import { Fireworks } from "@/components/Fireworks";
+import { MusicToggle } from "@/components/MusicToggle";
+import { EasterEggs } from "@/components/EasterEggs";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="grain">
+      <Loader />
+      <CustomCursor />
+      <Gate>
+        <SmoothScroll />
+        <main className="bg-cream text-ink">
+          <Cover />
+          <EditorsNote />
+          <MemoryTimeline />
+          <Magazine />
+          <Letter />
+          <Countdown />
+          <Fireworks />
+          <footer className="bg-ink text-cream/60 text-center py-10 text-[10px] tracking-[0.5em] uppercase">
+            &amp; Magazine · Issue 01 · For her, only.
+          </footer>
+        </main>
+        <MusicToggle />
+        <EasterEggs />
+      </Gate>
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
