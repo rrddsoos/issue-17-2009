@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-// Set this to her birthday at midnight (year-month-day). Currently next May 2.
+// Maithili — born 06 June 2009. Counts to next upcoming June 6.
 const BDAY = (() => {
   const now = new Date();
-  const y = now.getMonth() > 4 || (now.getMonth() === 4 && now.getDate() > 2) ? now.getFullYear() + 1 : now.getFullYear();
-  return new Date(y, 4, 2, 0, 0, 0); // month is 0-indexed (4 = May)
+  const passed = now.getMonth() > 5 || (now.getMonth() === 5 && now.getDate() > 6);
+  const y = passed ? now.getFullYear() + 1 : now.getFullYear();
+  return new Date(y, 5, 6, 0, 0, 0); // June 6
 })();
 
 export const Countdown = ({ onZero }: { onZero?: () => void }) => {
@@ -29,16 +30,18 @@ export const Countdown = ({ onZero }: { onZero?: () => void }) => {
     <section className="relative py-32 px-6 bg-ink text-cream overflow-hidden">
       <div className="absolute inset-0 grain opacity-30" />
       <div className="relative max-w-5xl mx-auto text-center">
-        <div className="text-[10px] tracking-[0.5em] uppercase text-gold-deep mb-4">{isNow ? "Today" : "Counting down"}</div>
+        <div className="text-[10px] tracking-[0.5em] uppercase text-gold-deep mb-4">{isNow ? "06 · 06 · today" : "Counting down to 06 June"}</div>
         {isNow ? (
-          <motion.h2
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
-            className="font-display text-7xl md:text-9xl gold-foil"
-          >Happy Birthday.</motion.h2>
+          >
+            <div className="font-display text-[10rem] md:text-[14rem] leading-none gold-foil">17</div>
+            <h2 className="font-display text-5xl md:text-7xl gold-foil mt-4">Happy Birthday, Maithili.</h2>
+          </motion.div>
         ) : (
           <>
-            <h2 className="font-display text-5xl md:text-7xl mb-10">Until the day.</h2>
+            <h2 className="font-display text-5xl md:text-7xl mb-10">Until her <em className="italic">seventeenth</em>.</h2>
             <div className="grid grid-cols-4 gap-4 md:gap-10 max-w-3xl mx-auto">
               {[
                 { v: days, l: "Days" }, { v: hrs, l: "Hours" },
