@@ -88,7 +88,7 @@ export const Gate = ({ children }: { children: React.ReactNode }) => {
                 </form>
 
                 <div className="mt-12 font-serif2 italic text-ink/40 text-sm">
-                  Hint: ask the editor.
+                  Hint: the name only I call you.
                 </div>
               </motion.div>
 
