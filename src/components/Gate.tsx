@@ -40,6 +40,7 @@ export const Gate = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
+      {children}
       <AnimatePresence>
         {!unlocked && (
           <motion.div
