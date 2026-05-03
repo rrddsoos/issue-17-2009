@@ -1,48 +1,59 @@
-## Personalize the site with Maithili's details
+## Two changes
 
-Wire in the content you've shared, leave clean placeholders for what's coming later.
+### 1. Fix the "now playing" label
 
-### 1. Name & nicknames → Cover, Magazine, Letter
+In `MusicToggle.tsx`, replace the current label *"You" — her favourite* with simply:
 
-- `Cover.tsx`: change `NAME` from `"AMARA"` to `"MAITHILI"`. Add nicknames as a rotating subtitle under the masthead — *baby · bachha · madam ji* — animated in sequence.
-- `EditorsNote.tsx`: weave the nicknames into the editor's letter so it reads personal.
-- Cover lines updated to: *The Woman, The Myth* / *A Letter From Krishna* / *Top 10 Memories*.
+> Now playing — *"Perfect"*
 
-### 2. Birthday → 06 June 2009 (turning 17)
+No more subtitle, no "her favourite". Same vinyl toggle, same placement.
 
-- `Countdown.tsx`: replace the auto-May-2 logic with a fixed June 6 anchor that picks the next upcoming June 6 each year. Heading becomes *Until her seventeenth*.
-- Add a small "17" monogram flourish on the cover and on the countdown "Today" state.
+### 2. New section: The Memory Wall (videos)
 
-### 3. Favourite song = "PERFECT" (her)
+A new component `MemoryWall.tsx`, slotted into `Index.tsx` between `Magazine` and `Letter` so it reads as a feature spread inside the issue.
 
-- `MusicToggle.tsx`: replace the track label with *Now playing — "You" (her favourite)* and style the toggle as a vinyl-needle indicator. Audio file you'll send later; for now it points to a silent placeholder so the UI still works.
+**Theme match (cream paper · burgundy · gold · grain texture):**
 
-### 4. The letter (full text from you)
+- Section header styled like the rest of the magazine: tiny tracked uppercase eyebrow (*Feature · The Memory Wall*), display-serif title *"Moving pictures."*, italic serif subtitle *"Press play, on us."*
+- Background: `bg-cream-deep` with the shared grain overlay so it sits naturally between Magazine and Letter.
+- Hairline gold dividers consistent with other sections.
 
-- `Letter.tsx`: replace the placeholder letter with your exact text, preserving the all-caps emphasis and line breaks. Title becomes *To, the love of my life*. Sign-off styled in handwritten script: *Yours, only yours — Krishna*.
-- Typewriter speed slowed slightly so the all-caps reads with weight, not noise.
+**Layout — a polaroid-style video wall:**
 
-### 5. Magazine personalization (text-only pass)
+```text
+┌─────────┐   ┌─────────┐   ┌─────────┐
+│  ▶ vid  │   │  ▶ vid  │   │  ▶ vid  │
+│         │   │         │   │         │
+└─ caption┘   └─ caption┘   └─ caption┘
+   tilt -2°      tilt +1.5°     tilt -1°
+```
 
-- Issue masthead: *Maithili · The 17th Edition*.
-- "The Interview" answers kept generic but Q's tweaked to feel like her.
-- "Top 10 Memories" left as labelled placeholders so we can drop in real ones when you send them.
-- **Final page reserved for the video edit** — a dedicated last spread titled *"And finally — press play"* with a video frame placeholder. When you send the video, I drop it in and it autoplays when that page is flipped open.
+- 6 video tiles in a responsive grid (1 col mobile, 2 sm, 3 md+).
+- Each tile uses the existing `polaroid` class with a slight random rotation (framer-motion `whileInView` fade + tilt-in) — visually consistent with `MemoryTimeline` and the Style File spread.
+- Each tile shows: video thumbnail/poster, a centered ▶ play button (same circular cream-bordered style used on Magazine page 10), and a handwritten caption in `font-hand text-burgundy` underneath.
+- Click a tile → opens a lightbox modal (Radix `Dialog`, already in the project) with the video playing full-size, dark backdrop, grain overlay, close on click-outside / Esc.
 
-### 6. Placeholders staying clean
+**Video sources:**
 
-- Style File (6 frames), Memory Timeline photos, Polaroid grid → all keep their elegant "No. 1 / No. 2…" placeholder treatment so the site looks intentional until you send images.
-- Passcode hint on the gate: I'll add a soft hint line *"the name only I call you"* — tell me if you want different wording, or leave it blank.
+- Component accepts a `videos` array `{ src, poster?, caption }`.
+- For now, ship with 6 placeholder slots labelled *Reel No. 1 … No. 6* with empty `src` — same intentional-placeholder treatment as the Style File and Memory Timeline. When you send the videos, we drop them into the array (or upload to Lovable Cloud storage and reference the public URLs).
 
-### What I still need from you (later, no rush)
+**Behavior details:**
 
-- Photos (timeline, style file, cover portrait)
-- The video edit (for the magazine's final page)
-- The passcode itself (already a secret — confirm it's set), and the hint text you want shown
-- Any friends' letters for the "Letters to the Editor" page
+- Videos are `<video>` tags, `playsInline`, `preload="metadata"`, no autoplay in the grid (only in the lightbox).
+- Pause any playing video when the modal closes.
+- Respects `prefers-reduced-motion` for the tilt animation.
 
-### Technical notes
+### Files touched
 
-- Files touched: `Cover.tsx`, `EditorsNote.tsx`, `Letter.tsx`, `Countdown.tsx`, `Magazine.tsx`, `MusicToggle.tsx`.
-- No schema or backend changes. No new dependencies.
-- Letter text rendered with `whitespace-pre-wrap` so your line breaks survive exactly as written.
+- edit `src/components/MusicToggle.tsx` (label only)
+- create `src/components/MemoryWall.tsx`
+- edit `src/pages/Index.tsx` (insert `<MemoryWall />` after `<Magazine />`)
+
+No new dependencies, no backend changes.  
+  
+**on the cover page ill give you  a picture of her gradient it into the cover page where is says maithili like actual magazines**
+
+### What I'll need from you later
+
+- The video files (or URLs) and a one-line caption for each — send whenever, I'll wire them in.
