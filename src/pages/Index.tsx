@@ -30,7 +30,7 @@ const Index = () => {
           <Countdown />
           <Fireworks />
           <footer className="bg-ink text-cream/60 text-center py-10 text-[10px] tracking-[0.5em] uppercase">
-            &amp; Magazine · Issue 01 · For her, only.
+            ICONIC SINCE 2009 · Issue 17 · For her, only.
           </footer>
         </main>
         <MusicToggle />
