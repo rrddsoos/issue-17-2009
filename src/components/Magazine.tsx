@@ -12,7 +12,7 @@ const Page = forwardRef<HTMLDivElement, { children: ReactNode; pageNum?: number;
         {children}
         {pageNum !== undefined && (
           <div className={`absolute bottom-5 ${side === "L" ? "left-6" : "right-6"} text-[10px] tracking-[0.4em] uppercase text-ink/50 font-body`}>
-            {pageNum} · &amp; Magazine
+            {pageNum} · ICONIC SINCE 2009
           </div>
         )}
       </div>
@@ -26,7 +26,7 @@ const Cover = forwardRef<HTMLDivElement>((_, ref) => (
     <div className="absolute inset-0 grain opacity-50" />
     <div className="relative h-full w-full p-10 flex flex-col">
       <div className="flex items-baseline justify-between text-[10px] tracking-[0.4em] uppercase text-cream/70">
-        <span>Maithili &amp; Co.</span><span>Issue 17 · The Birthday Edition</span>
+        <span>ICONIC SINCE 2009</span><span>Issue 17 · The Birthday Edition</span>
       </div>
       <div className="flex-1 flex flex-col justify-end pb-8">
         <div className="text-[11px] tracking-[0.5em] uppercase text-gold-deep mb-3">For Maithili — 06 · 06</div>
@@ -69,10 +69,10 @@ export const Magazine = () => {
     <section className="relative py-24 px-4 bg-cream-deep">
       <div className="max-w-6xl mx-auto text-center mb-10">
         <div className="text-[10px] tracking-[0.5em] uppercase text-burgundy mb-3">The Centerpiece</div>
-        <h2 className="font-display text-5xl md:text-7xl leading-[0.95] text-ink">
-          The <em className="font-serif2 italic">&amp; Magazine</em>
-        </h2>
-        <p className="font-serif2 italic text-lg text-ink/60 mt-3">An issue of one. Click the cover.</p>
+          <h2 className="font-display text-5xl md:text-7xl leading-[0.95] text-ink">
+            <em className="font-serif2 italic">ICONIC SINCE 2009</em>
+          </h2>
+          <p className="font-serif2 italic text-lg text-ink/60 mt-3">An issue of one. Click the cover.</p>
       </div>
 
       <div className="flex justify-center">
@@ -83,8 +83,8 @@ export const Magazine = () => {
         >
           {/* @ts-expect-error - lib types are loose */}
           <HTMLFlipBook
-            width={460} height={620} size="stretch" minWidth={300} maxWidth={520}
-            minHeight={400} maxHeight={700} maxShadowOpacity={0.4} showCover
+            width={560} height={760} size="stretch" minWidth={320} maxWidth={640}
+            minHeight={460} maxHeight={860} maxShadowOpacity={0.4} showCover
             mobileScrollSupport drawShadow flippingTime={900}
             ref={(el: FlipBook) => { bookRef.current = el; }}
             onFlip={(e: { data: number }) => setPage(e.data)}
