@@ -69,10 +69,10 @@ export const Magazine = () => {
     <section className="relative py-24 px-4 bg-cream-deep">
       <div className="max-w-6xl mx-auto text-center mb-10">
         <div className="text-[10px] tracking-[0.5em] uppercase text-burgundy mb-3">The Centerpiece</div>
-        <h2 className="font-display text-5xl md:text-7xl leading-[0.95] text-ink">
-          The <em className="font-serif2 italic">&amp; Magazine</em>
-        </h2>
-        <p className="font-serif2 italic text-lg text-ink/60 mt-3">An issue of one. Click the cover.</p>
+          <h2 className="font-display text-5xl md:text-7xl leading-[0.95] text-ink">
+            <em className="font-serif2 italic">ICONIC SINCE 2009</em>
+          </h2>
+          <p className="font-serif2 italic text-lg text-ink/60 mt-3">An issue of one. Click the cover.</p>
       </div>
 
       <div className="flex justify-center">
