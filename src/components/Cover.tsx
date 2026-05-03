@@ -52,28 +52,35 @@ export const Cover = () => {
           className="text-[11px] tracking-[0.5em] uppercase text-burgundy mb-6"
         >The woman of the year · turning seventeen</motion.div>
 
-        {/* MAITHILI — letters carry the portrait through them, magazine-style */}
-        <h1
-          className="font-display text-[18vw] md:text-[14vw] leading-[0.85] text-center select-none bg-clip-text text-transparent"
-          style={{
-            backgroundImage: `url(${maithiliCover})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center 30%",
-            WebkitBackgroundClip: "text",
-            WebkitTextStroke: "1px hsl(var(--ink) / 0.18)",
-            filter: "contrast(1.15) saturate(1.1)",
-          }}
-        >
-          {NAME.split("").map((c, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 80, filter: "blur(20px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ delay: 0.6 + i * 0.08, duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
-              className="inline-block"
-            >{c}</motion.span>
-          ))}
-        </h1>
+        {/* MAITHILI — image-clipped letters with a solid ink layer behind for legibility */}
+        <div className="relative">
+          <h1 aria-hidden className="absolute inset-0 font-display text-[18vw] md:text-[14vw] leading-[0.85] text-center select-none text-ink/90">
+            {NAME}
+          </h1>
+          <h1
+            className="relative font-display text-[18vw] md:text-[14vw] leading-[0.85] text-center select-none bg-clip-text text-transparent"
+            style={{
+              backgroundImage: `url(${maithiliCover})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center 25%",
+              WebkitBackgroundClip: "text",
+              WebkitTextStroke: "2px hsl(var(--ink))",
+              filter: "contrast(1.25) saturate(1.15) brightness(0.9)",
+              textShadow: "0 6px 30px hsl(var(--ink) / 0.35)",
+            }}
+          >
+            {NAME.split("").map((c, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 80, filter: "blur(20px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ delay: 0.6 + i * 0.08, duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
+                className="inline-block"
+              >{c}</motion.span>
+            ))}
+          </h1>
+        </div>
+
 
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }}
