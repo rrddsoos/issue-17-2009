@@ -12,7 +12,7 @@ const Page = forwardRef<HTMLDivElement, { children: ReactNode; pageNum?: number;
         {children}
         {pageNum !== undefined && (
           <div className={`absolute bottom-5 ${side === "L" ? "left-6" : "right-6"} text-[10px] tracking-[0.4em] uppercase text-ink/50 font-body`}>
-            {pageNum} · &amp; Magazine
+            {pageNum} · ICONIC SINCE 2009
           </div>
         )}
       </div>
