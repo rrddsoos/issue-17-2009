@@ -83,8 +83,8 @@ export const Magazine = () => {
         >
           {/* @ts-expect-error - lib types are loose */}
           <HTMLFlipBook
-            width={460} height={620} size="stretch" minWidth={300} maxWidth={520}
-            minHeight={400} maxHeight={700} maxShadowOpacity={0.4} showCover
+            width={560} height={760} size="stretch" minWidth={320} maxWidth={640}
+            minHeight={460} maxHeight={860} maxShadowOpacity={0.4} showCover
             mobileScrollSupport drawShadow flippingTime={900}
             ref={(el: FlipBook) => { bookRef.current = el; }}
             onFlip={(e: { data: number }) => setPage(e.data)}
