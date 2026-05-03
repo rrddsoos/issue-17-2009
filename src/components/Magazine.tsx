@@ -26,7 +26,7 @@ const Cover = forwardRef<HTMLDivElement>((_, ref) => (
     <div className="absolute inset-0 grain opacity-50" />
     <div className="relative h-full w-full p-10 flex flex-col">
       <div className="flex items-baseline justify-between text-[10px] tracking-[0.4em] uppercase text-cream/70">
-        <span>Maithili &amp; Co.</span><span>Issue 17 · The Birthday Edition</span>
+        <span>ICONIC SINCE 2009</span><span>Issue 17 · The Birthday Edition</span>
       </div>
       <div className="flex-1 flex flex-col justify-end pb-8">
         <div className="text-[11px] tracking-[0.5em] uppercase text-gold-deep mb-3">For Maithili — 06 · 06</div>
