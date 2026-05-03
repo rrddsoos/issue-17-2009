@@ -24,7 +24,7 @@ export const MusicToggle = () => {
     <div className="fixed bottom-6 right-6 z-[90] flex items-center gap-3">
       <div className="hidden sm:flex flex-col items-end text-right leading-tight">
         <div className="text-[8px] tracking-[0.4em] uppercase text-ink/50">Now playing</div>
-        <div className="font-serif2 italic text-sm text-ink">“You” <span className="text-ink/50">— her favourite</span></div>
+        <div className="font-serif2 italic text-sm text-ink">“Perfect”</div>
       </div>
       <button
         onClick={toggle}
