@@ -26,16 +26,13 @@ export const Cover = () => {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.6, ease: [0.2, 0.8, 0.2, 1] }}
           className="absolute inset-0 w-full h-full object-cover object-center"
-          style={{ filter: "sepia(0.18) saturate(0.9) contrast(1.02) brightness(0.96)" }}
+          style={{ filter: "sepia(0.05) saturate(1.05) contrast(1.05) brightness(1.02)" }}
         />
-        {/* cream gradient fades — top, bottom and sides — to blend portrait into the page */}
+        {/* subtle cream fades only at top/bottom edges so the portrait stays visible */}
         <div className="absolute inset-0" style={{
-          background: "linear-gradient(180deg, hsl(var(--cream)) 0%, hsl(var(--cream)/0.35) 22%, hsl(var(--cream)/0.15) 50%, hsl(var(--cream)/0.55) 80%, hsl(var(--cream)) 100%)"
+          background: "linear-gradient(180deg, hsl(var(--cream)/0.5) 0%, transparent 18%, transparent 82%, hsl(var(--cream)/0.7) 100%)"
         }} />
-        <div className="absolute inset-0" style={{
-          background: "radial-gradient(ellipse at center, transparent 30%, hsl(var(--cream)/0.6) 100%)"
-        }} />
-        <div className="absolute inset-0 grain opacity-70 pointer-events-none" />
+        <div className="absolute inset-0 grain opacity-40 pointer-events-none" />
       </motion.div>
 
       {/* masthead */}
