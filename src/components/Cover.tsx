@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import maithiliCover from "@/assets/maithili-cover.jpg";
 
 const NAME = "MAITHILI";
 const NICKNAMES = ["baby", "bachha", "madam ji"];
@@ -9,24 +10,60 @@ export const Cover = () => {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const op = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const photoY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
     <section ref={ref} className="relative min-h-screen overflow-hidden bg-cream">
+      {/* background portrait, faded into cream */}
+      <motion.div
+        style={{ y: photoY }}
+        className="absolute inset-0 z-0"
+      >
+        <motion.img
+          src={maithiliCover}
+          alt="Maithili"
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.6, ease: [0.2, 0.8, 0.2, 1] }}
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ filter: "sepia(0.18) saturate(0.9) contrast(1.02) brightness(0.96)" }}
+        />
+        {/* cream gradient fades — top, bottom and sides — to blend portrait into the page */}
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(180deg, hsl(var(--cream)) 0%, hsl(var(--cream)/0.35) 22%, hsl(var(--cream)/0.15) 50%, hsl(var(--cream)/0.55) 80%, hsl(var(--cream)) 100%)"
+        }} />
+        <div className="absolute inset-0" style={{
+          background: "radial-gradient(ellipse at center, transparent 30%, hsl(var(--cream)/0.6) 100%)"
+        }} />
+        <div className="absolute inset-0 grain opacity-70 pointer-events-none" />
+      </motion.div>
+
       {/* masthead */}
-      <div className="absolute top-0 inset-x-0 z-10 flex items-baseline justify-between px-6 md:px-12 pt-6 text-[10px] tracking-[0.4em] uppercase text-ink/70 font-body">
+      <div className="absolute top-0 inset-x-0 z-20 flex items-baseline justify-between px-6 md:px-12 pt-6 text-[10px] tracking-[0.4em] uppercase text-ink/70 font-body">
         <span>Issue 17 · The Birthday Edition</span>
         <span className="hidden md:inline">A Love Letter From Krishna</span>
         <span>VI · VI · MMXXVI</span>
       </div>
 
-      <motion.div style={{ y, opacity: op }} className="relative z-0 flex flex-col items-center justify-center min-h-screen px-6">
+      <motion.div style={{ y, opacity: op }} className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 1 }}
           className="text-[11px] tracking-[0.5em] uppercase text-burgundy mb-6"
         >The woman of the year · turning seventeen</motion.div>
 
-        <h1 className="font-display text-[18vw] md:text-[14vw] leading-[0.85] text-center text-ink select-none">
+        {/* MAITHILI — letters carry the portrait through them, magazine-style */}
+        <h1
+          className="font-display text-[18vw] md:text-[14vw] leading-[0.85] text-center select-none bg-clip-text text-transparent"
+          style={{
+            backgroundImage: `url(${maithiliCover})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center 30%",
+            WebkitBackgroundClip: "text",
+            WebkitTextStroke: "1px hsl(var(--ink) / 0.18)",
+            filter: "contrast(1.15) saturate(1.1)",
+          }}
+        >
           {NAME.split("").map((c, i) => (
             <motion.span
               key={i}
@@ -46,12 +83,12 @@ export const Cover = () => {
 
         <motion.p
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8, duration: 1 }}
-          className="font-serif2 italic text-xl md:text-2xl text-ink/70 text-center max-w-xl"
+          className="font-serif2 italic text-xl md:text-2xl text-ink/80 text-center max-w-xl"
+          style={{ textShadow: "0 1px 20px hsl(var(--cream))" }}
         >
           One hundred reasons, a thousand mornings, and<br className="hidden md:block"/> a forever already in motion.
         </motion.p>
 
-        {/* rotating nicknames */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2, duration: 1 }}
           className="mt-6 h-6 relative w-64 text-center overflow-hidden"
@@ -71,7 +108,6 @@ export const Cover = () => {
           ))}
         </motion.div>
 
-        {/* cover lines */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl text-center">
           {[
             { tag: "Cover Story", t: "The Woman, The Myth" },
@@ -82,6 +118,7 @@ export const Cover = () => {
               key={i}
               initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2 + i * 0.15, duration: 0.8 }}
+              className="backdrop-blur-[2px]"
             >
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">{c.tag}</div>
               <div className="font-display text-lg italic text-ink">{c.t}</div>
@@ -90,10 +127,9 @@ export const Cover = () => {
         </div>
       </motion.div>
 
-      {/* scroll cue */}
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.6, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.4em] uppercase text-ink/60 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-[10px] tracking-[0.4em] uppercase text-ink/60 flex flex-col items-center gap-2"
       >
         <span>Turn the page</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="h-8 w-px bg-ink/40" />
