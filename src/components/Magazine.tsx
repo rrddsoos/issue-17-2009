@@ -1,6 +1,90 @@
-import { useRef, useState, forwardRef, ReactNode } from "react";
+import { useRef, useState, forwardRef, ReactNode, useEffect } from "react";
 import HTMLFlipBook from "react-pageflip";
 import { motion } from "framer-motion";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+
+const HERO_VIDEO_SRC = "/media/cover-story.mp4";
+const HERO_VIDEO_POSTER = "/media/cover-story-poster.jpg";
+
+const HeroFilmPage = forwardRef<HTMLDivElement>((_, ref) => {
+  const [open, setOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (open) {
+      v.currentTime = 0;
+      v.play().catch(() => {});
+    } else {
+      v.pause();
+    }
+  }, [open]);
+
+  const goFullscreen = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    const req = v.requestFullscreen || (v as unknown as { webkitEnterFullscreen?: () => void }).webkitEnterFullscreen;
+    if (req) req.call(v);
+  };
+
+  return (
+    <div ref={ref} className="bg-paper relative overflow-hidden">
+      <div className="absolute inset-0 grain pointer-events-none" />
+      <div className="relative h-full w-full p-10 md:p-14 flex flex-col">
+        <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">And finally —</div>
+        <h2 className="font-display text-4xl italic mb-6">Press play.</h2>
+        <button
+          type="button"
+          data-cursor="hover"
+          onClick={() => setOpen(true)}
+          className="relative flex-1 bg-ink rounded-sm overflow-hidden flex items-center justify-center group"
+          style={{ minHeight: 320 }}
+        >
+          <img
+            src={HERO_VIDEO_POSTER}
+            alt=""
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+            className="absolute inset-0 w-full h-full object-cover opacity-90"
+          />
+          <div className="absolute inset-0 grain opacity-30" />
+          <div className="absolute inset-0 bg-gradient-to-br from-burgundy/40 via-transparent to-gold/20" />
+          <div className="relative z-10 flex flex-col items-center gap-3 text-cream">
+            <div className="h-16 w-16 rounded-full border-2 border-cream/80 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 bg-ink/30 backdrop-blur-sm">
+              <svg width="22" height="22" viewBox="0 0 16 16"><polygon points="4,3 13,8 4,13" fill="currentColor"/></svg>
+            </div>
+            <div className="text-[10px] tracking-[0.4em] uppercase text-cream/80">A short film · for you</div>
+          </div>
+        </button>
+        <p className="font-hand text-xl text-burgundy mt-4">— a little something I made for you.</p>
+        <div className="absolute bottom-5 left-6 text-[10px] tracking-[0.4em] uppercase text-ink/50 font-body">10 · ICONIC SINCE 2009</div>
+      </div>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-none w-screen h-screen sm:rounded-none bg-ink border-0 p-0 overflow-hidden flex items-center justify-center">
+          <div className="absolute inset-0 grain opacity-25 pointer-events-none" />
+          <video
+            ref={videoRef}
+            src={HERO_VIDEO_SRC}
+            poster={HERO_VIDEO_POSTER}
+            controls
+            playsInline
+            className="relative z-10 w-full h-full object-contain bg-ink"
+          />
+          <button
+            type="button"
+            onClick={goFullscreen}
+            className="absolute top-4 right-16 z-20 text-[10px] tracking-[0.4em] uppercase text-cream/80 hover:text-cream border border-cream/40 px-3 py-1.5 rounded-sm bg-ink/50 backdrop-blur-sm"
+            data-cursor="hover"
+          >
+            Fullscreen ⤢
+          </button>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+});
+HeroFilmPage.displayName = "HeroFilmPage";
 
 type FlipBook = { pageFlip: () => { flipNext: () => void; flipPrev: () => void; getCurrentPageIndex: () => number; getPageCount: () => number } };
 
@@ -183,21 +267,8 @@ export const Magazine = () => {
               <p className="font-hand text-3xl text-burgundy mt-3">— With love.</p>
             </Page>
 
-            <Page pageNum={10} side="L">
-              <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">And finally —</div>
-              <h2 className="font-display text-4xl italic mb-6">Press play.</h2>
-              <div className="relative flex-1 bg-ink rounded-sm overflow-hidden flex items-center justify-center" style={{ minHeight: 320 }}>
-                <div className="absolute inset-0 grain opacity-30" />
-                <div className="absolute inset-0 bg-gradient-to-br from-burgundy/40 via-transparent to-gold/20" />
-                <div className="relative z-10 flex flex-col items-center gap-3 text-cream">
-                  <div className="h-16 w-16 rounded-full border-2 border-cream/80 flex items-center justify-center">
-                    <svg width="22" height="22" viewBox="0 0 16 16"><polygon points="4,3 13,8 4,13" fill="currentColor"/></svg>
-                  </div>
-                  <div className="text-[10px] tracking-[0.4em] uppercase text-cream/70">A short film · reserved</div>
-                </div>
-              </div>
-              <p className="font-hand text-xl text-burgundy mt-4">— a little something I made for you.</p>
-            </Page>
+            <HeroFilmPage />
+
 
             <Back />
           </HTMLFlipBook>
