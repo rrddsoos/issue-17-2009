@@ -267,21 +267,8 @@ export const Magazine = () => {
               <p className="font-hand text-3xl text-burgundy mt-3">— With love.</p>
             </Page>
 
-            <Page pageNum={10} side="L">
-              <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">And finally —</div>
-              <h2 className="font-display text-4xl italic mb-6">Press play.</h2>
-              <div className="relative flex-1 bg-ink rounded-sm overflow-hidden flex items-center justify-center" style={{ minHeight: 320 }}>
-                <div className="absolute inset-0 grain opacity-30" />
-                <div className="absolute inset-0 bg-gradient-to-br from-burgundy/40 via-transparent to-gold/20" />
-                <div className="relative z-10 flex flex-col items-center gap-3 text-cream">
-                  <div className="h-16 w-16 rounded-full border-2 border-cream/80 flex items-center justify-center">
-                    <svg width="22" height="22" viewBox="0 0 16 16"><polygon points="4,3 13,8 4,13" fill="currentColor"/></svg>
-                  </div>
-                  <div className="text-[10px] tracking-[0.4em] uppercase text-cream/70">A short film · reserved</div>
-                </div>
-              </div>
-              <p className="font-hand text-xl text-burgundy mt-4">— a little something I made for you.</p>
-            </Page>
+            <HeroFilmPage />
+
 
             <Back />
           </HTMLFlipBook>
