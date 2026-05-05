@@ -5,12 +5,12 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 export type Reel = { src?: string; poster?: string; caption: string };
 
 const defaultReels: Reel[] = [
-  { caption: "the laugh, on tape" },
-  { caption: "a tuesday, somehow" },
-  { caption: "car windows down" },
-  { caption: "kitchen, dancing" },
-  { caption: "the slow afternoon" },
-  { caption: "and again, and again" },
+  { src: "/media/reels/reel-01.mp4", poster: "/media/reels/reel-01.jpg", caption: "the laugh, on tape" },
+  { src: "/media/reels/reel-02.mp4", poster: "/media/reels/reel-02.jpg", caption: "a tuesday, somehow" },
+  { src: "/media/reels/reel-03.mp4", poster: "/media/reels/reel-03.jpg", caption: "car windows down" },
+  { src: "/media/reels/reel-04.mp4", poster: "/media/reels/reel-04.jpg", caption: "kitchen, dancing" },
+  { src: "/media/reels/reel-05.mp4", poster: "/media/reels/reel-05.jpg", caption: "the slow afternoon" },
+  { src: "/media/reels/reel-06.mp4", poster: "/media/reels/reel-06.jpg", caption: "and again, and again" },
 ];
 
 const tilts = [-2, 1.5, -1, 2, -1.5, 1];
