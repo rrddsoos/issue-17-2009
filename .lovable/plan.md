@@ -1,59 +1,73 @@
-## Two changes
+## What changes
 
-### 1. Fix the "now playing" label
+### 1. Make the magazine's "Press play" page a real fullscreen video experience
 
-In `MusicToggle.tsx`, replace the current label *"You" — her favourite* with simply:
+Right now, page 10 of `Magazine.tsx` is a static black box with a decorative ▶ icon. I'll wire it up so:
 
-> Now playing — *"Perfect"*
+- The page shows a real `<video>` with a poster image (the photo you drop in).
+- Clicking the ▶ button opens a **fullscreen lightbox** (Radix `Dialog`, already in the project) — black backdrop, grain overlay, video centered at max viewport size (`w-screen h-screen`, `object-contain`), native controls, autoplay on open, paused + reset on close, Esc / click-outside to close.
+- A small "Enter fullscreen ⤢" affordance inside the lightbox calls the browser's native `requestFullscreen()` on the video element for true OS-level fullscreen (the one that hides the browser chrome).
+- Respects `prefers-reduced-motion`; `playsInline` so it doesn't break on iOS.
+- Same burgundy/gold/cream styling as the rest of the issue — no new design tokens.
 
-No more subtitle, no "her favourite". Same vinyl toggle, same placement.
+The page itself stays inside the flipbook layout (so the magazine still flips normally); only the *playback* goes fullscreen.
 
-### 2. New section: The Memory Wall (videos)
+### 2. Same fullscreen treatment for the Memory Wall reels
 
-A new component `MemoryWall.tsx`, slotted into `Index.tsx` between `Magazine` and `Letter` so it reads as a feature spread inside the issue.
+While I'm in there, I'll upgrade the existing `MemoryWall` lightbox the same way (true fullscreen button + larger default size), so all videos in the issue feel cinematic and consistent. Captions stay.
 
-**Theme match (cream paper · burgundy · gold · grain texture):**
+### 3. How you'll add the video and photos manually (no upload needed in chat)
 
-- Section header styled like the rest of the magazine: tiny tracked uppercase eyebrow (*Feature · The Memory Wall*), display-serif title *"Moving pictures."*, italic serif subtitle *"Press play, on us."*
-- Background: `bg-cream-deep` with the shared grain overlay so it sits naturally between Magazine and Letter.
-- Hairline gold dividers consistent with other sections.
+Since the file is too large for chat, you drop them straight into the project's `public/` folder — Vite serves anything in `public/` at the root URL. Two clean options:
 
-**Layout — a polaroid-style video wall:**
+**Option A — local files in `public/` (simplest):**
 
 ```text
-┌─────────┐   ┌─────────┐   ┌─────────┐
-│  ▶ vid  │   │  ▶ vid  │   │  ▶ vid  │
-│         │   │         │   │         │
-└─ caption┘   └─ caption┘   └─ caption┘
-   tilt -2°      tilt +1.5°     tilt -1°
+public/
+  media/
+    cover-story.mp4        ← the magazine page-10 film
+    cover-story-poster.jpg ← the still frame shown before play
+    reels/
+      reel-01.mp4
+      reel-01.jpg
+      reel-02.mp4
+      ...
+      reel-06.mp4
+      reel-06.jpg
 ```
 
-- 6 video tiles in a responsive grid (1 col mobile, 2 sm, 3 md+).
-- Each tile uses the existing `polaroid` class with a slight random rotation (framer-motion `whileInView` fade + tilt-in) — visually consistent with `MemoryTimeline` and the Style File spread.
-- Each tile shows: video thumbnail/poster, a centered ▶ play button (same circular cream-bordered style used on Magazine page 10), and a handwritten caption in `font-hand text-burgundy` underneath.
-- Click a tile → opens a lightbox modal (Radix `Dialog`, already in the project) with the video playing full-size, dark backdrop, grain overlay, close on click-outside / Esc.
+Then in code I reference them as `/media/cover-story.mp4` etc. — no imports, no build step. You just drag-drop the files into `public/media/` in the Lovable file tree (or via GitHub if you've connected the repo) and they're live on next reload.
 
-**Video sources:**
+**Option B — Lovable Cloud Storage (recommended if files are >50 MB or you want CDN delivery):**
 
-- Component accepts a `videos` array `{ src, poster?, caption }`.
-- For now, ship with 6 placeholder slots labelled *Reel No. 1 … No. 6* with empty `src` — same intentional-placeholder treatment as the Style File and Memory Timeline. When you send the videos, we drop them into the array (or upload to Lovable Cloud storage and reference the public URLs).
+I'd create a public `media` bucket via a migration, you upload the videos through the Cloud → Storage UI, and I wire the public URLs into the components. Better for large files and faster playback worldwide. We can switch to this anytime — the component takes URLs either way.
 
-**Behavior details:**
+For now I'll plan around **Option A** with the paths above. If you'd rather use Cloud Storage, say the word and I'll add the bucket + RLS in the same pass.
 
-- Videos are `<video>` tags, `playsInline`, `preload="metadata"`, no autoplay in the grid (only in the lightbox).
-- Pause any playing video when the modal closes.
-- Respects `prefers-reduced-motion` for the tilt animation.
+### Cover Story film + Memory Wall reels — what to name what
 
-### Files touched
+The cover-story page on the magazine wants **one** hero video (the main film). The Memory Wall wants up to **six** reels. Use these exact filenames so I don't have to ask again:
 
-- edit `src/components/MusicToggle.tsx` (label only)
-- create `src/components/MemoryWall.tsx`
-- edit `src/pages/Index.tsx` (insert `<MemoryWall />` after `<Magazine />`)
+| Slot | Video file | Poster (optional) |
+|---|---|---|
+| Magazine p.10 hero | `public/media/cover-story.mp4` | `public/media/cover-story-poster.jpg` |
+| Reel 1 | `public/media/reels/reel-01.mp4` | `public/media/reels/reel-01.jpg` |
+| Reel 2 | `public/media/reels/reel-02.mp4` | `public/media/reels/reel-02.jpg` |
+| Reel 3 | `public/media/reels/reel-03.mp4` | `public/media/reels/reel-03.jpg` |
+| Reel 4 | `public/media/reels/reel-04.mp4` | `public/media/reels/reel-04.jpg` |
+| Reel 5 | `public/media/reels/reel-05.mp4` | `public/media/reels/reel-05.jpg` |
+| Reel 6 | `public/media/reels/reel-06.mp4` | `public/media/reels/reel-06.jpg` |
 
-No new dependencies, no backend changes.  
-  
-**on the cover page ill give you  a picture of her gradient it into the cover page where is says maithili like actual magazines**
+Posters are optional — if missing, the player just shows the first frame. MP4 (H.264 + AAC) is the safest format; `.mov` from iPhone usually works too but MP4 is more reliable across browsers.
 
-### What I'll need from you later
+### Files I'll touch
 
-- The video files (or URLs) and a one-line caption for each — send whenever, I'll wire them in.
+- `src/components/Magazine.tsx` — turn page 10's box into a real player + fullscreen dialog
+- `src/components/MemoryWall.tsx` — upgrade the existing dialog to true fullscreen and wire `/media/reels/...` defaults
+
+No new dependencies, no backend changes (unless you pick Option B).
+
+### What I need from you to finish
+
+1. Confirm **Option A (drop files into `public/media/`)** or **Option B (Cloud Storage bucket)**.
+2. Drop the files in with the names above whenever ready — the page will work the moment they exist; missing files just show the placeholder.
