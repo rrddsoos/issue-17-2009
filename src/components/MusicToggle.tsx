@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-// Placeholder ambient track — swap with her favourite when ready.
-const SRC = "https://cdn.pixabay.com/audio/2022/03/15/audio_1d2e2f1f0a.mp3";
+// Drop "Perfect" by Ed Sheeran as /public/media/perfect.mp3
+const SRC = "/media/perfect.mp3";
 
 export const MusicToggle = () => {
   const ref = useRef<HTMLAudioElement | null>(null);
