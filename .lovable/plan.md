@@ -1,73 +1,53 @@
-## What changes
+## 1. Remove "Krishna" from the project
 
-### 1. Make the magazine's "Press play" page a real fullscreen video experience
+Four references found. All will be removed/rewritten:
 
-Right now, page 10 of `Magazine.tsx` is a static black box with a decorative ▶ icon. I'll wire it up so:
+- `src/components/Cover.tsx`
+  - Masthead: remove `"A Love Letter From Krishna"` line.
+  - Cover Story cards: change `{ tag: "Exclusive", t: "A Letter From Krishna" }` → `{ tag: "Exclusive", t: "A Letter, Just For You" }`.
+- `src/components/Letter.tsx`
+  - Sign-off currently ends with `Krishna.` — remove that name (replace with a neutral close like `— Yours, always.` or just drop the name).
+- `src/components/EditorsNote.tsx`
+  - `— Yours, always. Krishna.` → `— Yours, always.`
 
-- The page shows a real `<video>` with a poster image (the photo you drop in).
-- Clicking the ▶ button opens a **fullscreen lightbox** (Radix `Dialog`, already in the project) — black backdrop, grain overlay, video centered at max viewport size (`w-screen h-screen`, `object-contain`), native controls, autoplay on open, paused + reset on close, Esc / click-outside to close.
-- A small "Enter fullscreen ⤢" affordance inside the lightbox calls the browser's native `requestFullscreen()` on the video element for true OS-level fullscreen (the one that hides the browser chrome).
-- Respects `prefers-reduced-motion`; `playsInline` so it doesn't break on iOS.
-- Same burgundy/gold/cream styling as the rest of the issue — no new design tokens.
+No other Krishna strings exist in the codebase.
 
-The page itself stays inside the flipbook layout (so the magazine still flips normally); only the *playback* goes fullscreen.
+## 2. How to drop your media files in (the "media section")
 
-### 2. Same fullscreen treatment for the Memory Wall reels
+There is no in-app media uploader — the magazine reads files directly from the project's `public/media/` folder. That folder already exists in your repo (created earlier) but it isn't visible in the live preview, only in the Code Editor.
 
-While I'm in there, I'll upgrade the existing `MemoryWall` lightbox the same way (true fullscreen button + larger default size), so all videos in the issue feel cinematic and consistent. Captions stay.
+Two ways to get your files in:
 
-### 3. How you'll add the video and photos manually (no upload needed in chat)
+**Option A — Code Editor (in Lovable)**
 
-Since the file is too large for chat, you drop them straight into the project's `public/` folder — Vite serves anything in `public/` at the root URL. Two clean options:
+1. Open the **Code Editor** (top of the preview window on desktop, or the "…" menu → Code Editor on mobile).
+2. In the file tree, expand `public/` → `media/` (and `public/media/reels/`).
+3. Drag-and-drop your files directly into those folders.
 
-**Option A — local files in `public/` (simplest):**
+This works for small/medium files. Lovable's chat uploader has tight size limits, but the Code Editor file tree is more permissive.
 
-```text
-public/
-  media/
-    cover-story.mp4        ← the magazine page-10 film
-    cover-story-poster.jpg ← the still frame shown before play
-    reels/
-      reel-01.mp4
-      reel-01.jpg
-      reel-02.mp4
-      ...
-      reel-06.mp4
-      reel-06.jpg
-```
+**Option B — GitHub (recommended for large videos)**
 
-Then in code I reference them as `/media/cover-story.mp4` etc. — no imports, no build step. You just drag-drop the files into `public/media/` in the Lovable file tree (or via GitHub if you've connected the repo) and they're live on next reload.
+1. In project settings, connect the project to GitHub.
+2. Clone the repo locally, drop the videos into `public/media/` and `public/media/reels/`, commit and push.
+3. Lovable picks them up automatically.
 
-**Option B — Lovable Cloud Storage (recommended if files are >50 MB or you want CDN delivery):**
+**File names the code is already wired to look for**
 
-I'd create a public `media` bucket via a migration, you upload the videos through the Cloud → Storage UI, and I wire the public URLs into the components. Better for large files and faster playback worldwide. We can switch to this anytime — the component takes URLs either way.
+- `public/media/cover-story.mp4`
+- `public/media/cover-story-poster.jpg`
+- `public/media/reels/reel-01.mp4` … `reel-06.mp4`
+- `public/media/reels/reel-01.jpg` … `reel-06.jpg`
 
-For now I'll plan around **Option A** with the paths above. If you'd rather use Cloud Storage, say the word and I'll add the bucket + RLS in the same pass.
+If your file names differ, either rename them to match, or tell me the names and I'll wire them up.  
 
-### Cover Story film + Memory Wall reels — what to name what
 
-The cover-story page on the magazine wants **one** hero video (the main film). The Memory Wall wants up to **six** reels. Use these exact filenames so I don't have to ask again:
+## Files to edit
 
-| Slot | Video file | Poster (optional) |
-|---|---|---|
-| Magazine p.10 hero | `public/media/cover-story.mp4` | `public/media/cover-story-poster.jpg` |
-| Reel 1 | `public/media/reels/reel-01.mp4` | `public/media/reels/reel-01.jpg` |
-| Reel 2 | `public/media/reels/reel-02.mp4` | `public/media/reels/reel-02.jpg` |
-| Reel 3 | `public/media/reels/reel-03.mp4` | `public/media/reels/reel-03.jpg` |
-| Reel 4 | `public/media/reels/reel-04.mp4` | `public/media/reels/reel-04.jpg` |
-| Reel 5 | `public/media/reels/reel-05.mp4` | `public/media/reels/reel-05.jpg` |
-| Reel 6 | `public/media/reels/reel-06.mp4` | `public/media/reels/reel-06.jpg` |
+- `src/components/Cover.tsx`
+- `src/components/Letter.tsx`
 
-Posters are optional — if missing, the player just shows the first frame. MP4 (H.264 + AAC) is the safest format; `.mov` from iPhone usually works too but MP4 is more reliable across browsers.
-
-### Files I'll touch
-
-- `src/components/Magazine.tsx` — turn page 10's box into a real player + fullscreen dialog
-- `src/components/MemoryWall.tsx` — upgrade the existing dialog to true fullscreen and wire `/media/reels/...` defaults
-
-No new dependencies, no backend changes (unless you pick Option B).
-
-### What I need from you to finish
-
-1. Confirm **Option A (drop files into `public/media/`)** or **Option B (Cloud Storage bucket)**.
-2. Drop the files in with the names above whenever ready — the page will work the moment they exist; missing files just show the placeholder.
+### `src/components/EditorsNote.tsx`  
+  
+also play perfect by ed sheeran as the background music  
+  
