@@ -79,23 +79,36 @@ export const MemoryWall = ({ videos = defaultReels }: { videos?: Reel[] }) => {
       </div>
 
       <Dialog open={open !== null} onOpenChange={(o) => !o && setOpen(null)}>
-        <DialogContent className="max-w-3xl bg-ink border-ink p-0 overflow-hidden">
-          <div className="absolute inset-0 grain opacity-30 pointer-events-none" />
+        <DialogContent className="max-w-none w-screen h-screen sm:rounded-none bg-ink border-0 p-0 overflow-hidden flex flex-col items-center justify-center">
+          <div className="absolute inset-0 grain opacity-25 pointer-events-none" />
           {open !== null && videos[open]?.src ? (
-            <video
-              ref={dialogVideoRef}
-              src={videos[open].src}
-              poster={videos[open].poster}
-              controls
-              autoPlay
-              playsInline
-              className="relative w-full aspect-video bg-ink"
-            />
+            <>
+              <video
+                ref={dialogVideoRef}
+                src={videos[open].src}
+                poster={videos[open].poster}
+                controls
+                autoPlay
+                playsInline
+                className="relative z-10 w-full h-full object-contain bg-ink"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  const v = dialogVideoRef.current;
+                  if (!v) return;
+                  const req = v.requestFullscreen || (v as unknown as { webkitEnterFullscreen?: () => void }).webkitEnterFullscreen;
+                  if (req) req.call(v);
+                }}
+                className="absolute top-4 right-16 z-20 text-[10px] tracking-[0.4em] uppercase text-cream/80 hover:text-cream border border-cream/40 px-3 py-1.5 rounded-sm bg-ink/50 backdrop-blur-sm"
+                data-cursor="hover"
+              >
+                Fullscreen ⤢
+              </button>
+              <div className="absolute bottom-6 left-0 right-0 z-20 px-6 font-hand text-2xl text-blush text-center pointer-events-none">{videos[open].caption}</div>
+            </>
           ) : (
             <div className="aspect-video flex items-center justify-center text-cream/60 font-serif2 italic">Reel coming soon.</div>
-          )}
-          {open !== null && (
-            <div className="relative px-6 py-4 font-hand text-2xl text-blush text-center">{videos[open].caption}</div>
           )}
         </DialogContent>
       </Dialog>
