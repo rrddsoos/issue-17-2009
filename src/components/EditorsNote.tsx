@@ -31,7 +31,7 @@ export const EditorsNote = () => {
           transition={{ duration: 1, delay: 0.6 }}
           className="hairline-gold w-32 mt-10 origin-left"
         />
-        <div className="mt-4 font-hand text-3xl text-burgundy">— Yours, always. Krishna.</div>
+        <div className="mt-4 font-hand text-3xl text-burgundy">— Yours, always.</div>
       </div>
     </section>
   );

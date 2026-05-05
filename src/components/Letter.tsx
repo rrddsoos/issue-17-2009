@@ -11,8 +11,7 @@ NO MATTER HOW MUCH TIME I STAY WITH YOU, I DON'T THINK I WOULD BE ABLE TO FIGURE
 ONCE AGAIN, HAPPY BIRTHDAYY MERI JAAAAAN. I LOVE YOU THE MOSTTTT. WISHING WE WILL CELEBRATE 17 YEARS OF US SOOOOOOOOONNN.
 
 Yours,
-only yours —
-Krishna.`;
+only yours.`;
 
 export const Letter = () => {
   const ref = useRef<HTMLDivElement>(null);

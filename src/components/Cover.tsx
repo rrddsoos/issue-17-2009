@@ -38,7 +38,7 @@ export const Cover = () => {
       {/* masthead */}
       <div className="absolute top-0 inset-x-0 z-20 flex items-baseline justify-between px-6 md:px-12 pt-6 text-[10px] tracking-[0.4em] uppercase text-ink/70 font-body">
         <span>Issue 17 · The Birthday Edition</span>
-        <span className="hidden md:inline">A Love Letter From Krishna</span>
+        <span className="hidden md:inline">A Love Letter, Just For You</span>
         <span>VI · VI · MMXXVI</span>
       </div>
 
@@ -115,7 +115,7 @@ export const Cover = () => {
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl text-center">
           {[
             { tag: "Cover Story", t: "The Woman, The Myth" },
-            { tag: "Exclusive", t: "A Letter From Krishna" },
+            { tag: "Exclusive", t: "A Letter, Just For You" },
             { tag: "Inside", t: "Top 10 Memories" },
           ].map((c, i) => (
             <motion.div
