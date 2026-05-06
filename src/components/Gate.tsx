@@ -59,7 +59,7 @@ export const Gate = ({ children }: { children: React.ReactNode }) => {
                 transition={{ duration: 0.4 }}
                 className="max-w-md w-full text-center"
               >
-                <div className="text-[10px] tracking-[0.5em] uppercase text-burgundy mb-4">Members Only</div>
+                <div className="text-[10px] tracking-[0.5em] uppercase text-burgundy mb-4">For Her Only</div>
                 <h1 className="font-display text-5xl md:text-6xl leading-[1.05] text-ink">
                   A private<br/><em className="gold-foil">issue</em>
                 </h1>
@@ -89,7 +89,7 @@ export const Gate = ({ children }: { children: React.ReactNode }) => {
                 </form>
 
                 <div className="mt-12 font-serif2 italic text-ink/40 text-sm">
-                  Hint: the name only I call you.
+                  Hint: your all time favorite song.
                 </div>
               </motion.div>
 
