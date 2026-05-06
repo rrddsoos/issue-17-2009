@@ -70,7 +70,7 @@ export const MemoryWall = ({ videos = defaultReels }: { videos?: Reel[] }) => {
                 </div>
                 <div className="absolute top-2 left-2 text-[8px] tracking-[0.4em] uppercase text-cream/70">Reel No. {String(i + 1).padStart(2, "0")}</div>
               </div>
-              <div className="mt-4 font-hand text-2xl text-burgundy text-center">{v.caption}</div>
+              
             </motion.button>
           ))}
         </div>
@@ -105,7 +105,7 @@ export const MemoryWall = ({ videos = defaultReels }: { videos?: Reel[] }) => {
               >
                 Fullscreen ⤢
               </button>
-              <div className="absolute bottom-6 left-0 right-0 z-20 px-6 font-hand text-2xl text-blush text-center pointer-events-none">{videos[open].caption}</div>
+              
             </>
           ) : (
             <div className="aspect-video flex items-center justify-center text-cream/60 font-serif2 italic">Reel coming soon.</div>

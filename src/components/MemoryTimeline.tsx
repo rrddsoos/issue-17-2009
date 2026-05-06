@@ -2,12 +2,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const memories = [
-  { tag: "Chapter I", title: "The First Look", note: "A glance that lasted a season." },
-  { tag: "Chapter II", title: "Late-Night Walks", note: "Streetlights and confessions." },
-  { tag: "Chapter III", title: "Coffee, Slowly", note: "Two cups, one paper, infinite hours." },
-  { tag: "Chapter IV", title: "Rainy Days In", note: "Movies, blankets, and your laugh." },
-  { tag: "Chapter V", title: "Somewhere New", note: "Maps folded, stories unfolded." },
-  { tag: "Chapter VI", title: "Just Us", note: "The chapter still being written." },
+  { tag: "Chapter I", title: "The Spark", note: "Where it all began." },
+  { tag: "Chapter II", title: "During The Great Separation", note: "Distance, tested and survived." },
+  { tag: "Chapter III", title: "Stronger This Time", note: "Returned, deeper than before." },
 ];
 
 const palette = ["from-blush", "from-cream", "from-paper", "from-blush", "from-cream", "from-paper"];
@@ -30,7 +27,7 @@ export const MemoryTimeline = () => {
           <div className="shrink-0 w-[80vw] md:w-[60vw] flex flex-col justify-center">
             <div className="text-[10px] tracking-[0.5em] uppercase text-burgundy mb-4">The Memoir</div>
             <h2 className="font-display text-6xl md:text-8xl leading-[0.9] text-ink mb-6">
-              Six chapters,<br/><em className="font-serif2 italic">one love.</em>
+              Three chapters,<br/><em className="font-serif2 italic">one love.</em>
             </h2>
             <p className="font-serif2 italic text-xl text-ink/70 max-w-md">
               Scroll, slowly. Each frame is a moment we earned.
