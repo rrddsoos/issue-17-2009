@@ -213,18 +213,30 @@ export const Magazine = () => {
             </Page>
 
             <Page pageNum={5} side="R">
-              <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">Style File</div>
-              <h2 className="font-display text-4xl mb-6">A look,<br/><em className="italic">in eight frames.</em></h2>
-              <div className="grid grid-cols-4 gap-2 flex-1">
-                {[1,2,3,4,5,6,7,8].map(i => (
-                  <div key={i} className={`aspect-[3/4] ${i%2 ? 'bg-blush' : 'bg-cream-deep'} polaroid !p-2 !pb-6`}>
-                    <img src={`/media/style/style-${i}.jpg`} alt={`Frame ${i}`} className="h-full w-full object-cover" loading="lazy" />
+              <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">Style File · I</div>
+              <h2 className="font-display text-4xl mb-4">A look,<br/><em className="italic">in eight frames.</em></h2>
+              <div className="grid grid-cols-2 gap-4 flex-1">
+                {[1,2,3,4].map(i => (
+                  <div key={i} className={`${i%2 ? 'bg-blush' : 'bg-cream-deep'} polaroid !p-2 !pb-5 overflow-hidden`}>
+                    <img src={`/media/style/style-${i}.jpg`} alt={`Frame ${i}`} className="h-full w-full object-cover" loading="eager" decoding="async" />
                   </div>
                 ))}
               </div>
             </Page>
 
             <Page pageNum={6} side="L">
+              <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">Style File · II</div>
+              <h2 className="font-display text-4xl mb-4">Continued,<br/><em className="italic">four more.</em></h2>
+              <div className="grid grid-cols-2 gap-4 flex-1">
+                {[5,6,7,8].map(i => (
+                  <div key={i} className={`${i%2 ? 'bg-blush' : 'bg-cream-deep'} polaroid !p-2 !pb-5 overflow-hidden`}>
+                    <img src={`/media/style/style-${i}.jpg`} alt={`Frame ${i}`} className="h-full w-full object-cover" loading="eager" decoding="async" />
+                  </div>
+                ))}
+              </div>
+            </Page>
+
+            <Page pageNum={7} side="R">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">Horoscope · This Year</div>
               <h2 className="font-display text-4xl mb-6">Written in <em className="italic">your</em> stars.</h2>
               <p className="font-serif2 text-lg leading-relaxed text-ink/85">
@@ -234,7 +246,7 @@ export const Magazine = () => {
               <p className="font-hand text-2xl text-burgundy mt-3">A great year, by every reading.</p>
             </Page>
 
-            <Page pageNum={7} side="L">
+            <Page pageNum={8} side="L">
               <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">From Him</div>
               <h2 className="font-display text-4xl italic mb-6">From him.</h2>
               <p className="font-serif2 text-base text-ink/60 italic">— A few lines, set in print, just for you.</p>
@@ -244,7 +256,7 @@ export const Magazine = () => {
               </div>
             </Page>
 
-            <Page pageNum={8} side="R">
+            <Page pageNum={9} side="R">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">A Closing Note</div>
               <h2 className="font-display text-4xl italic mb-6">Until next issue.</h2>
               <p className="font-serif2 text-lg leading-relaxed text-ink/85">
