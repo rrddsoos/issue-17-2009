@@ -183,9 +183,8 @@ export const Magazine = () => {
                 <li className="flex justify-between"><span>The Cover Story</span><span className="text-ink/40">04</span></li>
                 <li className="flex justify-between"><span>The Interview</span><span className="text-ink/40">10</span></li>
                 <li className="flex justify-between"><span>Style File</span><span className="text-ink/40">14</span></li>
-                <li className="flex justify-between"><span>Top 10 Memories</span><span className="text-ink/40">18</span></li>
-                <li className="flex justify-between"><span>Horoscope of the Year</span><span className="text-ink/40">22</span></li>
-                <li className="flex justify-between"><span>Letters to the Editor</span><span className="text-ink/40">26</span></li>
+                <li className="flex justify-between"><span>Horoscope of the Year</span><span className="text-ink/40">20</span></li>
+                <li className="flex justify-between"><span>From Him</span><span className="text-ink/40">24</span></li>
               </ol>
               <div className="hairline-gold w-24 mt-10" />
               <p className="font-hand text-2xl text-burgundy mt-4">— Page through, slowly.</p>
@@ -215,29 +214,17 @@ export const Magazine = () => {
 
             <Page pageNum={5} side="R">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">Style File</div>
-              <h2 className="font-display text-4xl mb-6">A look,<br/><em className="italic">in six frames.</em></h2>
-              <div className="grid grid-cols-3 gap-3 flex-1">
-                {[0,1,2,3,4,5].map(i => (
+              <h2 className="font-display text-4xl mb-6">A look,<br/><em className="italic">in eight frames.</em></h2>
+              <div className="grid grid-cols-4 gap-2 flex-1">
+                {[1,2,3,4,5,6,7,8].map(i => (
                   <div key={i} className={`aspect-[3/4] ${i%2 ? 'bg-blush' : 'bg-cream-deep'} polaroid !p-2 !pb-6`}>
-                    <div className="h-full w-full bg-gradient-to-br from-cream to-blush flex items-center justify-center">
-                      <span className="font-display italic text-2xl text-ink/20">No. {i+1}</span>
-                    </div>
+                    <img src={`/media/style/style-${i}.jpg`} alt={`Frame ${i}`} className="h-full w-full object-cover" loading="lazy" />
                   </div>
                 ))}
               </div>
             </Page>
 
             <Page pageNum={6} side="L">
-              <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">Top 10 Memories</div>
-              <h2 className="font-display text-4xl italic mb-6">Greatest hits.</h2>
-              <ol className="font-serif2 text-base space-y-2 text-ink/85">
-                {["The first hello","Coffee, the long way","That trip","The kitchen dancing","Movie marathons","Surprise breakfasts","Long phone calls","Walking nowhere","The quiet Sundays","Every single day"].map((t,i) => (
-                  <li key={i} className="flex gap-3"><span className="font-display text-burgundy w-6">{String(i+1).padStart(2,'0')}</span><span>{t}</span></li>
-                ))}
-              </ol>
-            </Page>
-
-            <Page pageNum={7} side="R">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">Horoscope · This Year</div>
               <h2 className="font-display text-4xl mb-6">Written in <em className="italic">your</em> stars.</h2>
               <p className="font-serif2 text-lg leading-relaxed text-ink/85">
@@ -247,17 +234,17 @@ export const Magazine = () => {
               <p className="font-hand text-2xl text-burgundy mt-3">A great year, by every reading.</p>
             </Page>
 
-            <Page pageNum={8} side="L">
-              <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">Letters to the Editor</div>
-              <h2 className="font-display text-4xl italic mb-6">From the audience.</h2>
-              <p className="font-serif2 text-base text-ink/60 italic">— Reserved for letters from your favorite people. Ask them to write a line; we’ll set it in print here.</p>
+            <Page pageNum={7} side="L">
+              <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">From Him</div>
+              <h2 className="font-display text-4xl italic mb-6">From him.</h2>
+              <p className="font-serif2 text-base text-ink/60 italic">— A few lines, set in print, just for you.</p>
               <div className="mt-6 space-y-4 font-serif2 text-base text-ink/85">
                 <div className="border-l-2 border-gold pl-4 italic">“Happiest birthday to the kindest person I know.” <span className="not-italic block text-sm text-ink/50 mt-1">— a friend, soon.</span></div>
                 <div className="border-l-2 border-gold pl-4 italic">“You make every room better.” <span className="not-italic block text-sm text-ink/50 mt-1">— another, soon.</span></div>
               </div>
             </Page>
 
-            <Page pageNum={9} side="R">
+            <Page pageNum={8} side="R">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">A Closing Note</div>
               <h2 className="font-display text-4xl italic mb-6">Until next issue.</h2>
               <p className="font-serif2 text-lg leading-relaxed text-ink/85">
