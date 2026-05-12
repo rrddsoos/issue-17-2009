@@ -246,7 +246,7 @@ export const Magazine = () => {
               <p className="font-hand text-2xl text-burgundy mt-3">A great year, by every reading.</p>
             </Page>
 
-            <Page pageNum={7} side="L">
+            <Page pageNum={8} side="L">
               <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">From Him</div>
               <h2 className="font-display text-4xl italic mb-6">From him.</h2>
               <p className="font-serif2 text-base text-ink/60 italic">— A few lines, set in print, just for you.</p>
@@ -256,7 +256,7 @@ export const Magazine = () => {
               </div>
             </Page>
 
-            <Page pageNum={8} side="R">
+            <Page pageNum={9} side="R">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">A Closing Note</div>
               <h2 className="font-display text-4xl italic mb-6">Until next issue.</h2>
               <p className="font-serif2 text-lg leading-relaxed text-ink/85">
