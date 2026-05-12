@@ -1,20 +1,26 @@
 import { motion } from "framer-motion";
 
-const memories = [
-  { tag: "Chapter I", title: "The Spark", note: "Where it all began." },
-  { tag: "Chapter II", title: "During The Great Separation", note: "Distance, tested and survived." },
-  { tag: "Chapter III", title: "Stronger This Time", note: "Returned, deeper than before." },
-];
+type Chapter = {
+  tag: string;
+  title: string;
+  note: string;
+  type: "video" | "image";
+  src: string;
+};
 
-const palette = ["from-blush", "from-cream", "from-paper"];
+const memories: Chapter[] = [
+  { tag: "Chapter I", title: "The Spark", note: "Where it all began.", type: "video", src: "/media/chapters/chapter-1.mp4" },
+  { tag: "Chapter II", title: "During The Great Separation", note: "Distance, tested and survived.", type: "image", src: "/media/chapters/chapter-2.jpg" },
+  { tag: "Chapter III", title: "Stronger This Time", note: "Returned, deeper than before.", type: "image", src: "/media/chapters/chapter-3.jpg" },
+];
 
 export const MemoryTimeline = () => {
   return (
     <section className="relative py-24 md:py-32 bg-cream">
       <div className="max-w-3xl mx-auto px-6 md:px-12">
         {/* header */}
-        <div className="mb-20">
-          <div className="absolute top-10 left-0 right-0 px-6 md:px-12 z-10 flex justify-between text-[10px] tracking-[0.4em] uppercase text-ink/60">
+        <div className="mb-20 relative">
+          <div className="absolute -top-14 left-0 right-0 z-10 flex justify-between text-[10px] tracking-[0.4em] uppercase text-ink/60">
             <span>Feature · The Memoir</span>
             <span>pp. 22 — 36</span>
           </div>
@@ -39,11 +45,26 @@ export const MemoryTimeline = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex flex-col"
             >
-              <div className={`relative aspect-[3/4] bg-gradient-to-br ${palette[i % palette.length]} to-cream-deep polaroid`}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-display text-8xl text-ink/12 italic" style={{ color: 'hsl(var(--ink) / 0.08)' }}>{i + 1}</span>
-                </div>
-                <div className="absolute bottom-3 left-3 right-3 font-hand text-2xl text-burgundy">{m.title}</div>
+              <div className="relative aspect-[3/4] bg-cream-deep overflow-hidden polaroid">
+                {m.type === "video" ? (
+                  <video
+                    src={m.src}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                  />
+                ) : (
+                  <img
+                    src={m.src}
+                    alt={m.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                )}
+                <div className="absolute bottom-3 left-3 right-3 font-hand text-2xl text-paper drop-shadow-lg">{m.title}</div>
               </div>
               <div className="mt-5 flex items-baseline gap-3">
                 <span className="text-[10px] tracking-[0.4em] uppercase text-gold-deep">{m.tag}</span>
