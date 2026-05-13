@@ -88,6 +88,125 @@ HeroFilmPage.displayName = "HeroFilmPage";
 
 type FlipBook = { pageFlip: () => { flipNext: () => void; flipPrev: () => void; getCurrentPageIndex: () => number; getPageCount: () => number } };
 
+const LavenderGardenPage = forwardRef<HTMLDivElement, { pageNum: number; side: "L" | "R" }>(
+  ({ pageNum, side }, ref) => {
+    const FLOWERS = 14;
+    const [bloomed, setBloomed] = useState<Set<number>>(new Set());
+    const positions = [
+      { l: 8, b: 6, h: 38, hue: 268 }, { l: 16, b: 4, h: 46, hue: 275 },
+      { l: 24, b: 8, h: 34, hue: 262 }, { l: 32, b: 5, h: 50, hue: 280 },
+      { l: 40, b: 7, h: 40, hue: 270 }, { l: 48, b: 4, h: 44, hue: 285 },
+      { l: 56, b: 9, h: 36, hue: 265 }, { l: 64, b: 6, h: 48, hue: 278 },
+      { l: 72, b: 5, h: 42, hue: 272 }, { l: 80, b: 8, h: 38, hue: 282 },
+      { l: 88, b: 4, h: 46, hue: 268 }, { l: 12, b: 14, h: 30, hue: 290 },
+      { l: 52, b: 16, h: 28, hue: 258 }, { l: 84, b: 14, h: 32, hue: 288 },
+    ];
+
+    const toggle = (i: number) => {
+      setBloomed(prev => {
+        const next = new Set(prev);
+        next.has(i) ? next.delete(i) : next.add(i);
+        return next;
+      });
+    };
+
+    return (
+      <div ref={ref} className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(35 40% 94%) 0%, hsl(280 30% 88%) 55%, hsl(110 25% 70%) 100%)" }}>
+        <div className="absolute inset-0 grain pointer-events-none" />
+        {/* sun */}
+        <div className="absolute top-10 right-12 w-20 h-20 rounded-full" style={{ background: "radial-gradient(circle, hsl(45 80% 80%) 0%, hsl(45 80% 80% / 0) 70%)" }} />
+        <div className="relative h-full w-full p-10 md:p-14 flex flex-col">
+          <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">An Interactive Garden</div>
+          <h2 className="font-display text-4xl italic mb-2">Lavender lilies,<br/>for you to pick.</h2>
+          <p className="font-serif2 italic text-base text-ink/70">Tap a stem. Watch it bloom. <span className="font-hand text-xl text-burgundy ml-1">— {bloomed.size} picked</span></p>
+
+          <div className="absolute inset-x-0 bottom-0 h-[55%]">
+            {/* grass */}
+            <div className="absolute inset-x-0 bottom-0 h-10" style={{ background: "linear-gradient(180deg, hsl(110 30% 55% / 0) 0%, hsl(110 35% 40%) 100%)" }} />
+            {positions.slice(0, FLOWERS).map((p, i) => {
+              const isBloom = bloomed.has(i);
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  data-cursor="hover"
+                  onClick={() => toggle(i)}
+                  className="absolute group"
+                  style={{ left: `${p.l}%`, bottom: `${p.b}%`, height: `${p.h}%`, transformOrigin: "bottom center", animation: `sway ${3 + (i % 4) * 0.4}s ease-in-out ${i * 0.15}s infinite alternate` }}
+                  aria-label={`Flower ${i + 1}`}
+                >
+                  <svg viewBox="0 0 40 200" preserveAspectRatio="xMidYMax meet" className="h-full w-auto block overflow-visible">
+                    {/* stem */}
+                    <path d="M20 200 Q18 140 20 80" stroke="hsl(110 40% 35%)" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                    {/* leaf */}
+                    <path d="M20 150 Q8 140 6 122 Q18 130 20 145 Z" fill="hsl(110 35% 42%)" />
+                    {/* lily petals */}
+                    <g style={{ transformOrigin: "20px 70px", transform: isBloom ? "scale(1.15)" : "scale(0.85)", transition: "transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1)" }}>
+                      {[0, 60, 120, 180, 240, 300].map(rot => (
+                        <ellipse
+                          key={rot}
+                          cx="20" cy="55" rx="6" ry="14"
+                          fill={`hsl(${p.hue} ${isBloom ? 60 : 40}% ${isBloom ? 72 : 60}%)`}
+                          opacity={isBloom ? 0.92 : 0.7}
+                          style={{ transform: `rotate(${rot}deg)`, transformOrigin: "20px 70px", transition: "fill 500ms, opacity 500ms" }}
+                        />
+                      ))}
+                      <circle cx="20" cy="70" r={isBloom ? 5 : 3.5} fill="hsl(45 85% 65%)" style={{ transition: "r 500ms" }} />
+                      {isBloom && (
+                        <>
+                          <circle cx="20" cy="70" r="9" fill="none" stroke="hsl(45 85% 75%)" strokeWidth="0.8" opacity="0.6">
+                            <animate attributeName="r" from="5" to="18" dur="1.2s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" from="0.7" to="0" dur="1.2s" repeatCount="indefinite" />
+                          </circle>
+                        </>
+                      )}
+                    </g>
+                  </svg>
+                </button>
+              );
+            })}
+            {/* floating petals when blooms exist */}
+            {bloomed.size > 0 && Array.from({ length: Math.min(bloomed.size * 2, 12) }).map((_, i) => (
+              <div
+                key={`p-${i}`}
+                className="absolute pointer-events-none"
+                style={{
+                  left: `${(i * 13 + 7) % 95}%`,
+                  bottom: 0,
+                  width: 8, height: 8,
+                  borderRadius: "60% 40% 60% 40%",
+                  background: `hsl(${265 + (i * 7) % 30} 55% 75%)`,
+                  animation: `petal-float ${6 + (i % 5)}s linear ${i * 0.4}s infinite`,
+                  opacity: 0.7,
+                }}
+              />
+            ))}
+          </div>
+
+          {bloomed.size >= FLOWERS && (
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
+              <p className="font-hand text-4xl text-burgundy bg-paper/70 px-6 py-3 rounded-sm backdrop-blur-sm">a whole bouquet — for you.</p>
+            </div>
+          )}
+
+          <div className={`absolute bottom-5 ${side === "L" ? "left-6" : "right-6"} text-[10px] tracking-[0.4em] uppercase text-ink/60 font-body`}>
+            {pageNum} · ICONIC SINCE 2009
+          </div>
+        </div>
+        <style>{`
+          @keyframes sway { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
+          @keyframes petal-float {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translate(${Math.random() > 0.5 ? '' : '-'}40px, -380px) rotate(360deg); opacity: 0; }
+          }
+        `}</style>
+      </div>
+    );
+  }
+);
+LavenderGardenPage.displayName = "LavenderGardenPage";
+
 const Page = forwardRef<HTMLDivElement, { children: ReactNode; pageNum?: number; side?: "L" | "R" }>(
   ({ children, pageNum, side }, ref) => (
     <div ref={ref} className="bg-paper relative overflow-hidden">
@@ -183,6 +302,7 @@ export const Magazine = () => {
                 <li className="flex justify-between"><span>The Interview</span><span className="text-ink/40">10</span></li>
                 <li className="flex justify-between"><span>Style File</span><span className="text-ink/40">14</span></li>
                 <li className="flex justify-between"><span>From Him</span><span className="text-ink/40">20</span></li>
+                <li className="flex justify-between"><span>The Lavender Garden</span><span className="text-ink/40">22</span></li>
               </ol>
               <div className="hairline-gold w-24 mt-10" />
               <p className="font-hand text-2xl text-burgundy mt-4">— Page through, slowly.</p>
@@ -243,7 +363,9 @@ export const Magazine = () => {
               </div>
             </Page>
 
-            <Page pageNum={8} side="R">
+            <LavenderGardenPage pageNum={8} side="R" />
+
+            <Page pageNum={9} side="L">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">A Closing Note</div>
               <h2 className="font-display text-4xl italic mb-6">Until next issue.</h2>
               <p className="font-serif2 text-lg leading-relaxed text-ink/85">
