@@ -200,7 +200,7 @@ export const Magazine = () => {
 
             <Page pageNum={4} side="L">
               <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">The Interview</div>
-              <h2 className="font-display text-3xl mb-6 italic">Five questions, on the record.</h2>
+              <h2 className="font-display text-3xl mb-6 italic">Four questions, on the record.</h2>
               <div className="space-y-4 font-serif2 text-base text-ink/85">
                 <div><span className="font-display font-bold">Q.</span> Best day, this year?<br/><span className="italic">A. that one saturday of may</span></div>
                 <div><span className="font-display font-bold">Q.</span> fav dish<br/><span className="italic">A. malka masoor</span></div>
@@ -233,7 +233,7 @@ export const Magazine = () => {
               </div>
             </Page>
 
-            <Page pageNum={8} side="L">
+            <Page pageNum={7} side="L">
               <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">From Him</div>
               <h2 className="font-display text-4xl italic mb-6">From him.</h2>
               <p className="font-serif2 text-base text-ink/60 italic">— A few lines, set in print, just for you.</p>
@@ -243,7 +243,7 @@ export const Magazine = () => {
               </div>
             </Page>
 
-            <Page pageNum={9} side="R">
+            <Page pageNum={8} side="R">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">A Closing Note</div>
               <h2 className="font-display text-4xl italic mb-6">Until next issue.</h2>
               <p className="font-serif2 text-lg leading-relaxed text-ink/85">
