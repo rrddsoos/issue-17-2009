@@ -302,6 +302,7 @@ export const Magazine = () => {
                 <li className="flex justify-between"><span>The Interview</span><span className="text-ink/40">10</span></li>
                 <li className="flex justify-between"><span>Style File</span><span className="text-ink/40">14</span></li>
                 <li className="flex justify-between"><span>From Him</span><span className="text-ink/40">20</span></li>
+                <li className="flex justify-between"><span>The Lavender Garden</span><span className="text-ink/40">22</span></li>
               </ol>
               <div className="hairline-gold w-24 mt-10" />
               <p className="font-hand text-2xl text-burgundy mt-4">— Page through, slowly.</p>
