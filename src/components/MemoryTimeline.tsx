@@ -54,7 +54,8 @@ export const MemoryTimeline = () => {
                     muted
                     loop
                     playsInline
-                    preload="metadata"
+                    controls
+                    preload="auto"
                   />
                 ) : (
                   <img

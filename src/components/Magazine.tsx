@@ -215,7 +215,7 @@ export const Magazine = () => {
             <Page pageNum={5} side="R">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">Style File · I</div>
               <h2 className="font-display text-4xl mb-4">A look,<br/><em className="italic">in eight frames.</em></h2>
-              <div className="grid grid-cols-2 gap-4 flex-1">
+              <div className="grid grid-cols-2 grid-rows-2 gap-4 flex-1 min-h-0">
                 {[1,2,3,4].map(i => (
                   <div key={i} className={`${i%2 ? 'bg-blush' : 'bg-cream-deep'} polaroid !p-2 !pb-5 overflow-hidden`}>
                     <img src={`/media/style/style-${i}.jpg`} alt={`Frame ${i}`} className="h-full w-full object-cover" loading="eager" decoding="async" />
@@ -227,7 +227,7 @@ export const Magazine = () => {
             <Page pageNum={6} side="L">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">Style File · II</div>
               <h2 className="font-display text-4xl mb-4">Continued,<br/><em className="italic">four more.</em></h2>
-              <div className="grid grid-cols-2 gap-4 flex-1">
+              <div className="grid grid-cols-2 grid-rows-2 gap-4 flex-1 min-h-0">
                 {[5,6,7,8].map(i => (
                   <div key={i} className={`${i%2 ? 'bg-blush' : 'bg-cream-deep'} polaroid !p-2 !pb-5 overflow-hidden`}>
                     <img src={`/media/style/style-${i}.jpg`} alt={`Frame ${i}`} className="h-full w-full object-cover" loading="eager" decoding="async" />
