@@ -243,7 +243,9 @@ export const Magazine = () => {
               </div>
             </Page>
 
-            <Page pageNum={8} side="R">
+            <LavenderGardenPage pageNum={8} side="R" />
+
+            <Page pageNum={9} side="L">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">A Closing Note</div>
               <h2 className="font-display text-4xl italic mb-6">Until next issue.</h2>
               <p className="font-serif2 text-lg leading-relaxed text-ink/85">
