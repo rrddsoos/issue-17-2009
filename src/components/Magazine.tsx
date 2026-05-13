@@ -122,7 +122,6 @@ const Cover = forwardRef<HTMLDivElement>((_, ref) => (
           <li>· The Cover Story</li>
           <li>· The Interview</li>
           <li>· Top 10 Memories</li>
-          <li>· Horoscope of the Year</li>
           <li>· Letters to the Editor</li>
         </ul>
       </div>
@@ -183,8 +182,7 @@ export const Magazine = () => {
                 <li className="flex justify-between"><span>The Cover Story</span><span className="text-ink/40">04</span></li>
                 <li className="flex justify-between"><span>The Interview</span><span className="text-ink/40">10</span></li>
                 <li className="flex justify-between"><span>Style File</span><span className="text-ink/40">14</span></li>
-                <li className="flex justify-between"><span>Horoscope of the Year</span><span className="text-ink/40">20</span></li>
-                <li className="flex justify-between"><span>From Him</span><span className="text-ink/40">24</span></li>
+                <li className="flex justify-between"><span>From Him</span><span className="text-ink/40">20</span></li>
               </ol>
               <div className="hairline-gold w-24 mt-10" />
               <p className="font-hand text-2xl text-burgundy mt-4">— Page through, slowly.</p>
@@ -202,12 +200,11 @@ export const Magazine = () => {
 
             <Page pageNum={4} side="L">
               <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">The Interview</div>
-              <h2 className="font-display text-3xl mb-6 italic">Five questions, on the record.</h2>
+              <h2 className="font-display text-3xl mb-6 italic">Four questions, on the record.</h2>
               <div className="space-y-4 font-serif2 text-base text-ink/85">
-                <div><span className="font-display font-bold">Q.</span> Best day, this year?<br/><span className="italic">A. The quiet one in October.</span></div>
-                <div><span className="font-display font-bold">Q.</span> Comfort meal?<br/><span className="italic">A. Anything I cook for her.</span></div>
+                <div><span className="font-display font-bold">Q.</span> Best day, this year?<br/><span className="italic">A. that one saturday of may</span></div>
+                <div><span className="font-display font-bold">Q.</span> fav dish<br/><span className="italic">A. malka masoor</span></div>
                 <div><span className="font-display font-bold">Q.</span> A song that is yours?<br/><span className="italic">A. The one we play in the car.</span></div>
-                <div><span className="font-display font-bold">Q.</span> A place we’ll go?<br/><span className="italic">A. Everywhere, eventually.</span></div>
                 <div><span className="font-display font-bold">Q.</span> What now?<br/><span className="italic">A. Turn the page.</span></div>
               </div>
             </Page>
@@ -236,17 +233,7 @@ export const Magazine = () => {
               </div>
             </Page>
 
-            <Page pageNum={7} side="R">
-              <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">Horoscope · This Year</div>
-              <h2 className="font-display text-4xl mb-6">Written in <em className="italic">your</em> stars.</h2>
-              <p className="font-serif2 text-lg leading-relaxed text-ink/85">
-                Mercury moves in your favor. Jupiter is generous. There will be a small kindness in March, an excellent meal in June, and a window seat in October that changes everything. Spend money on flowers and bookmarks. Trust the slow ones. Wear gold.
-              </p>
-              <div className="hairline-gold w-16 mt-6" />
-              <p className="font-hand text-2xl text-burgundy mt-3">A great year, by every reading.</p>
-            </Page>
-
-            <Page pageNum={8} side="L">
+            <Page pageNum={7} side="L">
               <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-2">From Him</div>
               <h2 className="font-display text-4xl italic mb-6">From him.</h2>
               <p className="font-serif2 text-base text-ink/60 italic">— A few lines, set in print, just for you.</p>
@@ -256,7 +243,7 @@ export const Magazine = () => {
               </div>
             </Page>
 
-            <Page pageNum={9} side="R">
+            <Page pageNum={8} side="R">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">A Closing Note</div>
               <h2 className="font-display text-4xl italic mb-6">Until next issue.</h2>
               <p className="font-serif2 text-lg leading-relaxed text-ink/85">
