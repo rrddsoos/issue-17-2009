@@ -3,8 +3,8 @@ import HTMLFlipBook from "react-pageflip";
 import { motion } from "framer-motion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
-const HERO_VIDEO_SRC = "/media/cover-story.mp4";
-const HERO_VIDEO_POSTER = "/media/cover-story-poster.jpg";
+const HERO_VIDEO_SRC = "/media/reels/cover-story.mp4";
+const HERO_VIDEO_POSTER = "/media/reels/cover-story-poster.jpg";
 
 const HeroFilmPage = forwardRef<HTMLDivElement>((_, ref) => {
   const [open, setOpen] = useState(false);
