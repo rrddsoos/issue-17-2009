@@ -6,6 +6,7 @@ import { Cover } from "@/components/Cover";
 import { EditorsNote } from "@/components/EditorsNote";
 import { MemoryTimeline } from "@/components/MemoryTimeline";
 import { Magazine } from "@/components/Magazine";
+import { LavenderGarden } from "@/components/LavenderGarden";
 import { MemoryWall } from "@/components/MemoryWall";
 import { Letter } from "@/components/Letter";
 import { Countdown } from "@/components/Countdown";
@@ -26,6 +27,7 @@ const Index = () => {
           <MemoryTimeline />
           <Magazine />
           <MemoryWall />
+          <LavenderGarden />
           <Letter />
           <Countdown />
           <Fireworks />
