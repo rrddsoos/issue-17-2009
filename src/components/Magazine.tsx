@@ -130,7 +130,9 @@ const LavenderGardenPage = forwardRef<HTMLDivElement, { pageNum: number; side: "
                   key={i}
                   type="button"
                   data-cursor="hover"
-                  onClick={() => toggle(i)}
+                  onClick={(e) => { e.stopPropagation(); toggle(i); }}
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onTouchStart={(e) => e.stopPropagation()}
                   className="absolute group"
                   style={{ left: `${p.l}%`, bottom: `${p.b}%`, height: `${p.h}%`, transformOrigin: "bottom center", animation: `sway ${3 + (i % 4) * 0.4}s ease-in-out ${i * 0.15}s infinite alternate` }}
                   aria-label={`Flower ${i + 1}`}
