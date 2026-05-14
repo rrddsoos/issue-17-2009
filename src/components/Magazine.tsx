@@ -183,7 +183,7 @@ export const Magazine = () => {
                 <li className="flex justify-between"><span>The Interview</span><span className="text-ink/40">10</span></li>
                 <li className="flex justify-between"><span>Style File</span><span className="text-ink/40">14</span></li>
                 <li className="flex justify-between"><span>From Him</span><span className="text-ink/40">20</span></li>
-                <li className="flex justify-between"><span>The Lavender Garden</span><span className="text-ink/40">22</span></li>
+                
               </ol>
               <div className="hairline-gold w-24 mt-10" />
               <p className="font-hand text-2xl text-burgundy mt-4">— Page through, slowly.</p>
@@ -243,8 +243,6 @@ export const Magazine = () => {
                 <div className="border-l-2 border-gold pl-4 italic">“You make every room better.” <span className="not-italic block text-sm text-ink/50 mt-1">— another, soon.</span></div>
               </div>
             </Page>
-
-            <LavenderGardenPage pageNum={8} side="R" />
 
             <Page pageNum={9} side="L">
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">A Closing Note</div>
