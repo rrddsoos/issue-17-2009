@@ -3,8 +3,8 @@ import HTMLFlipBook from "react-pageflip";
 import { motion } from "framer-motion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
-const HERO_VIDEO_SRC = "/media/reels/cover-story.mp4";
-const HERO_VIDEO_POSTER = "/media/reels/cover-story-poster.jpg";
+const HERO_VIDEO_SRC = `${import.meta.env.BASE_URL}media/reels/cover-story.mp4`;
+const HERO_VIDEO_POSTER = `${import.meta.env.BASE_URL}media/reels/cover-story-poster.jpg`;
 
 const HeroFilmPage = forwardRef<HTMLDivElement>((_, ref) => {
   const [open, setOpen] = useState(false);
@@ -216,7 +216,7 @@ export const Magazine = () => {
               <div className="grid grid-cols-2 grid-rows-2 gap-4 flex-1 min-h-0">
                 {[1,2,3,4].map(i => (
                   <div key={i} className={`${i%2 ? 'bg-blush' : 'bg-cream-deep'} polaroid !p-2 !pb-5 overflow-hidden`}>
-                    <img src={`/media/style/style-${i}.jpg`} alt={`Frame ${i}`} className="h-full w-full object-cover" loading="eager" decoding="async" />
+                    <img src={`${import.meta.env.BASE_URL}media/style/style-${i}.jpg`} alt={`Frame ${i}`} className="h-full w-full object-cover" loading="eager" decoding="async" />
                   </div>
                 ))}
               </div>
@@ -228,7 +228,7 @@ export const Magazine = () => {
               <div className="grid grid-cols-2 grid-rows-2 gap-4 flex-1 min-h-0">
                 {[5,6,7,8].map(i => (
                   <div key={i} className={`${i%2 ? 'bg-blush' : 'bg-cream-deep'} polaroid !p-2 !pb-5 overflow-hidden`}>
-                    <img src={`/media/style/style-${i}.jpg`} alt={`Frame ${i}`} className="h-full w-full object-cover" loading="eager" decoding="async" />
+                    <img src={`${import.meta.env.BASE_URL}media/style/style-${i}.jpg`} alt={`Frame ${i}`} className="h-full w-full object-cover" loading="eager" decoding="async" />
                   </div>
                 ))}
               </div>

@@ -9,9 +9,9 @@ type Chapter = {
 };
 
 const memories: Chapter[] = [
-  { tag: "Chapter I", title: "The Spark", note: "Where it all began.", type: "video", src: "/media/chapters/chapter-1.mp4" },
-  { tag: "Chapter II", title: "During The Great Separation", note: "Distance, tested and survived.", type: "image", src: "/media/chapters/chapter-2.jpg" },
-  { tag: "Chapter III", title: "Stronger This Time", note: "Returned, deeper than before.", type: "image", src: "/media/chapters/chapter-3.jpg" },
+  { tag: "Chapter I", title: "The Spark", note: "Where it all began.", type: "video", src: `${import.meta.env.BASE_URL}media/chapters/chapter-1.mp4` },
+  { tag: "Chapter II", title: "During The Great Separation", note: "Distance, tested and survived.", type: "image", src: `${import.meta.env.BASE_URL}media/chapters/chapter-2.jpg` },
+  { tag: "Chapter III", title: "Stronger This Time", note: "Returned, deeper than before.", type: "image", src: `${import.meta.env.BASE_URL}media/chapters/chapter-3.jpg` },
 ];
 
 export const MemoryTimeline = () => {
