@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -10,6 +10,14 @@ export const Gate = ({ children }: { children: React.ReactNode }) => {
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
   const [shake, setShake] = useState(0);
+const audioRef = useRef<HTMLAudioElement | null>(null);
+
+useEffect(() => {
+  const a = new Audio(`${import.meta.env.BASE_URL}media/perfect.mp3`);
+  a.loop = true; a.volume = 0.25;
+  audioRef.current = a;
+  return () => { a.pause(); };
+}, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -29,6 +37,7 @@ export const Gate = ({ children }: { children: React.ReactNode }) => {
       if (data?.ok) {
         sessionStorage.setItem(TOKEN_KEY, data.token);
         setUnlocked(true);
+        audioRef.current?.play().catch(() => {});
       } else {
         setErr("Not quite. Try again.");
         setShake((s) => s + 1);
