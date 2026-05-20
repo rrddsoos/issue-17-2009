@@ -11,6 +11,12 @@ export const MusicToggle = () => {
     a.loop = true; a.volume = 0.25; a.preload = "none";
     ref.current = a;
 
+    // Start music when Gate dispatches the event
+    const handleStartMusic = () => {
+      a.play().then(() => setOn(true)).catch(() => {});
+    };
+    window.addEventListener("start-music", handleStartMusic);
+
     // Pause music when any video plays
     const handleVideoPlay = () => {
       if (ref.current && !ref.current.paused) {
@@ -21,7 +27,7 @@ export const MusicToggle = () => {
 
     // Resume music when any video pauses or ends
     const handleVideoStop = () => {
-      if (ref.current) {
+      if (ref.current && on) {
         ref.current.play().then(() => setOn(true)).catch(() => {});
       }
     };
@@ -43,6 +49,7 @@ export const MusicToggle = () => {
       a.pause();
       ref.current = null;
       observer.disconnect();
+      window.removeEventListener("start-music", handleStartMusic);
     };
   }, []);
 
