@@ -15,14 +15,14 @@ only yours.`;
 
 export const Letter = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-30%" });
+  const inView = useInView(ref, { once: true, margin: "0px" });
   const [shown, setShown] = useState(0);
 
   useEffect(() => {
     if (!inView) return;
     let i = 0;
     const id = setInterval(() => {
-      i += 2;
+      i += 5;
       setShown(i);
       if (i >= LETTER.length) clearInterval(id);
     }, 28);
