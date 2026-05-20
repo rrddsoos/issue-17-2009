@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 
-// Drop "Perfect" by Ed Sheeran as /public/media/perfect.mp3
 const SRC = `${import.meta.env.BASE_URL}media/perfect.mp3`;
 
 export const MusicToggle = () => {
@@ -11,7 +10,40 @@ export const MusicToggle = () => {
     const a = new Audio(SRC);
     a.loop = true; a.volume = 0.25; a.preload = "none";
     ref.current = a;
-    return () => { a.pause(); ref.current = null; };
+
+    // Pause music when any video plays
+    const handleVideoPlay = () => {
+      if (ref.current && !ref.current.paused) {
+        ref.current.pause();
+        setOn(false);
+      }
+    };
+
+    // Resume music when any video pauses or ends
+    const handleVideoStop = () => {
+      if (ref.current) {
+        ref.current.play().then(() => setOn(true)).catch(() => {});
+      }
+    };
+
+    const observer = new MutationObserver(() => {
+      document.querySelectorAll("video").forEach((v) => {
+        v.removeEventListener("play", handleVideoPlay);
+        v.removeEventListener("pause", handleVideoStop);
+        v.removeEventListener("ended", handleVideoStop);
+        v.addEventListener("play", handleVideoPlay);
+        v.addEventListener("pause", handleVideoStop);
+        v.addEventListener("ended", handleVideoStop);
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      a.pause();
+      ref.current = null;
+      observer.disconnect();
+    };
   }, []);
 
   const toggle = () => {
@@ -24,7 +56,7 @@ export const MusicToggle = () => {
     <div className="fixed bottom-6 right-6 z-[90] flex items-center gap-3">
       <div className="hidden sm:flex flex-col items-end text-right leading-tight">
         <div className="text-[8px] tracking-[0.4em] uppercase text-ink/50">Now playing</div>
-        <div className="font-serif2 italic text-sm text-ink">“Perfect”</div>
+        <div className="font-serif2 italic text-sm text-ink">"Perfect"</div>
       </div>
       <button
         onClick={toggle}
@@ -32,7 +64,6 @@ export const MusicToggle = () => {
         className="relative h-14 w-14 rounded-full border border-ink/40 bg-ink flex items-center justify-center hover:border-burgundy transition-colors group"
         aria-label={on ? "Mute" : "Play"}
       >
-        {/* vinyl */}
         <div className={`absolute inset-1 rounded-full bg-gradient-to-br from-ink to-black ${on ? "animate-spin" : ""}`} style={{ animationDuration: "3s" }}>
           <div className="absolute inset-0 rounded-full" style={{ background: "repeating-radial-gradient(circle, hsl(var(--cream)/0.04) 0 1px, transparent 1px 3px)" }} />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full bg-burgundy" />
