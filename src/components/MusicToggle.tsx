@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // Drop "Perfect" by Ed Sheeran as /public/media/perfect.mp3
-const SRC = "/media/perfect.mp3";
+const SRC = `${import.meta.env.BASE_URL}media/perfect.mp3`;
 
 export const MusicToggle = () => {
   const ref = useRef<HTMLAudioElement | null>(null);
