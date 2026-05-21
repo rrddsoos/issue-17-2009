@@ -17,17 +17,21 @@ export const MusicToggle = () => {
     };
     window.addEventListener("start-music", handleStartMusic);
 
-    // Pause music when any video plays
-    const handleVideoPlay = () => {
+    // Pause music only when user-played videos (with controls) start
+    const handleVideoPlay = (e: Event) => {
+      const video = e.target as HTMLVideoElement;
+      if (!video.controls) return;
       if (ref.current && !ref.current.paused) {
         ref.current.pause();
         setOn(false);
       }
     };
 
-    // Resume music when any video pauses or ends
-    const handleVideoStop = () => {
-      if (ref.current && on) {
+    // Resume music only when user-played videos stop
+    const handleVideoStop = (e: Event) => {
+      const video = e.target as HTMLVideoElement;
+      if (!video.controls) return;
+      if (ref.current) {
         ref.current.play().then(() => setOn(true)).catch(() => {});
       }
     };
