@@ -40,7 +40,7 @@ export const Letter = () => {
         >To <em className="italic gold-foil">the love of my life</em>.</motion.h2>
 
         <div className="relative bg-cream p-10 md:p-14 polaroid">
-          <pre className="font-hand text-2xl md:text-[1.7rem] leading-[1.55] text-ink whitespace-pre-wrap font-normal">
+          <pre className="font-hand text-2xl md:text-[1.7rem] leading-[1.55] text-ink whitespace-pre-wrap font-normal overflow-y-auto max-h-[60vh]">
             {LETTER.slice(0, shown)}
             {shown < LETTER.length && <span className="inline-block w-[2px] h-7 bg-burgundy align-middle animate-pulse ml-1" />}
           </pre>
