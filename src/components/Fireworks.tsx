@@ -67,7 +67,7 @@ export const Fireworks = () => {
 
   return (
     <section ref={ref} className="relative h-[100vh] bg-ink overflow-hidden">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
