@@ -208,7 +208,7 @@ export const Magazine = () => {
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">Cover Story · pp. 04</div>
               <h2 className="font-display text-5xl leading-[1] mb-6">The Woman,<br/><em className="italic">The Myth.</em></h2>
               <p className="font-serif2 text-base leading-relaxed drop-cap text-ink/85">
-                There's a particular kind of person who walks into a room and rearranges the furniture without touching a thing. She is that kind of person. Soft-spoken until she isn't, brilliant on a Tuesday, devastating in a doorway. This is the woman who taught me what it means to be paid attention to. The pages that follow are merely a footnote.
+                There's a particular kind of person who walks into a room and rearranges the furniture without touching a thing. She is that kind of person. Soft-spoken until she isn't, brilliant on a Sunday, devastating in a doorway. This is the woman who taught me what it means to be paid attention to. The pages that follow are merely a footnote.
               </p>
               <div className="hairline-gold w-20 mt-6" />
               <p className="font-serif2 italic text-lg mt-4 text-burgundy">"The first thing I noticed was the way she laughed. The last will be too."</p>
@@ -220,7 +220,7 @@ export const Magazine = () => {
               <div className="space-y-4 font-serif2 text-base text-ink/85">
                 <div><span className="font-display font-bold">Q.</span> Best day, this year?<br/><span className="italic">A. that one saturday of may</span></div>
                 <div><span className="font-display font-bold">Q.</span> fav dish<br/><span className="italic">A. malka masoor</span></div>
-                <div><span className="font-display font-bold">Q.</span> A song that is yours?<br/><span className="italic">A. The one we play in the car.</span></div>
+                <div><span className="font-display font-bold">Q.</span> A song that is yours?<br/><span className="italic">A. The passcode of this web.</span></div>
                 <div><span className="font-display font-bold">Q.</span> What now?<br/><span className="italic">A. Turn the page.</span></div>
               </div>
             </Page>
