@@ -152,13 +152,14 @@ export const Magazine = () => {
     <section className="relative py-24 px-4 bg-cream-deep">
       <div className="max-w-6xl mx-auto text-center mb-10">
         <div className="text-[10px] tracking-[0.5em] uppercase text-burgundy mb-3">The Centerpiece</div>
-          <h2 className="font-display text-5xl md:text-7xl leading-[0.95] text-ink">
-            <em className="font-serif2 italic">ICONIC SINCE 2009</em>
-          </h2>
-          <p className="font-serif2 italic text-lg text-ink/60 mt-3">An issue of one. Click the cover.</p>
+        <h2 className="font-display text-5xl md:text-7xl leading-[0.95] text-ink">
+          <em className="font-serif2 italic">ICONIC SINCE 2009</em>
+        </h2>
+        <p className="font-serif2 italic text-lg text-ink/60 mt-3">An issue of one. Click the cover.</p>
       </div>
 
-      <div className="flex justify-center">
+      {/* Desktop flipbook */}
+      <div className="hidden md:flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.9 }}
@@ -166,8 +167,8 @@ export const Magazine = () => {
         >
           {/* @ts-expect-error - lib types are loose */}
           <HTMLFlipBook
-            width={420} height={580} size="stretch" minWidth={300} maxWidth={980}
-            minHeight={400} maxHeight={1280} maxShadowOpacity={0.4} showCover
+            width={820} height={1100} size="stretch" minWidth={420} maxWidth={980}
+            minHeight={600} maxHeight={1280} maxShadowOpacity={0.4} showCover
             mobileScrollSupport drawShadow flippingTime={900}
             ref={(el: FlipBook) => { bookRef.current = el; }}
             onFlip={(e: { data: number }) => setPage(e.data)}
@@ -183,7 +184,6 @@ export const Magazine = () => {
                 <li className="flex justify-between"><span>The Interview</span><span className="text-ink/40">10</span></li>
                 <li className="flex justify-between"><span>Style File</span><span className="text-ink/40">14</span></li>
                 <li className="flex justify-between"><span>From Him</span><span className="text-ink/40">20</span></li>
-                
               </ol>
               <div className="hairline-gold w-24 mt-10" />
               <p className="font-hand text-2xl text-burgundy mt-4">— Page through, slowly.</p>
@@ -193,10 +193,10 @@ export const Magazine = () => {
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">Cover Story · pp. 04</div>
               <h2 className="font-display text-5xl leading-[1] mb-6">The Woman,<br/><em className="italic">The Myth.</em></h2>
               <p className="font-serif2 text-base leading-relaxed drop-cap text-ink/85">
-                There’s a particular kind of person who walks into a room and rearranges the furniture without touching a thing. She is that kind of person. Soft-spoken until she isn’t, brilliant on a Tuesday, devastating in a doorway. This is the woman who taught me what it means to be paid attention to. The pages that follow are merely a footnote.
+                There's a particular kind of person who walks into a room and rearranges the furniture without touching a thing. She is that kind of person. Soft-spoken until she isn't, brilliant on a Tuesday, devastating in a doorway. This is the woman who taught me what it means to be paid attention to. The pages that follow are merely a footnote.
               </p>
               <div className="hairline-gold w-20 mt-6" />
-              <p className="font-serif2 italic text-lg mt-4 text-burgundy">“The first thing I noticed was the way she laughed. The last will be too.”</p>
+              <p className="font-serif2 italic text-lg mt-4 text-burgundy">"The first thing I noticed was the way she laughed. The last will be too."</p>
             </Page>
 
             <Page pageNum={4} side="L">
@@ -239,8 +239,8 @@ export const Magazine = () => {
               <h2 className="font-display text-4xl italic mb-6">From him.</h2>
               <p className="font-serif2 text-base text-ink/60 italic">— A few lines, set in print, just for you.</p>
               <div className="mt-6 space-y-4 font-serif2 text-base text-ink/85">
-                <div className="border-l-2 border-gold pl-4 italic">“Happiest birthday to the kindest person I know.” <span className="not-italic block text-sm text-ink/50 mt-1">— a friend, soon.</span></div>
-                <div className="border-l-2 border-gold pl-4 italic">“You make every room better.” <span className="not-italic block text-sm text-ink/50 mt-1">— another, soon.</span></div>
+                <div className="border-l-2 border-gold pl-4 italic">"Happiest birthday to the kindest person I know." <span className="not-italic block text-sm text-ink/50 mt-1">— a friend, soon.</span></div>
+                <div className="border-l-2 border-gold pl-4 italic">"You make every room better." <span className="not-italic block text-sm text-ink/50 mt-1">— another, soon.</span></div>
               </div>
             </Page>
 
@@ -255,14 +255,34 @@ export const Magazine = () => {
             </Page>
 
             <HeroFilmPage />
-
-
             <Back />
           </HTMLFlipBook>
         </motion.div>
       </div>
 
-      <div className="flex items-center justify-center gap-6 mt-8">
+      {/* Mobile view */}
+      <div className="md:hidden flex flex-col gap-6 px-2">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.9 }}
+          className="bg-ink text-cream p-10 polaroid"
+        >
+          <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">For Maithili — 06 · 06</div>
+          <h2 className="font-display text-4xl leading-[0.9] mb-4">For <em className="gold-foil">her</em>,<br/>and her alone.</h2>
+          <div className="hairline-gold w-24 my-5" />
+          <ul className="font-serif2 italic text-base space-y-2 text-cream/80 mb-6">
+            <li>· The Cover Story</li>
+            <li>· The Interview</li>
+            <li>· Style File</li>
+            <li>· From Him</li>
+          </ul>
+          <p className="font-serif2 italic text-cream/60 text-sm border-t border-cream/20 pt-4">
+            Open on a desktop for the full flipbook experience ✦
+          </p>
+        </motion.div>
+      </div>
+
+      <div className="hidden md:flex items-center justify-center gap-6 mt-8">
         <button onClick={() => bookRef.current?.pageFlip().flipPrev()} className="text-[10px] tracking-[0.4em] uppercase border-b border-ink/40 hover:border-burgundy pb-1" data-cursor="hover">← Prev</button>
         <span className="font-serif2 italic text-sm text-ink/60">{Math.min(page+1, count || 1)} / {count || "—"}</span>
         <button onClick={() => bookRef.current?.pageFlip().flipNext()} className="text-[10px] tracking-[0.4em] uppercase border-b border-ink/40 hover:border-burgundy pb-1" data-cursor="hover">Next →</button>
