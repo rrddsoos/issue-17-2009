@@ -92,19 +92,7 @@ export const MemoryWall = ({ videos = defaultReels }: { videos?: Reel[] }) => {
                 playsInline
                 className="relative z-10 w-full h-full object-contain bg-ink"
               />
-              <button
-                type="button"
-                onClick={() => {
-                  const v = dialogVideoRef.current;
-                  if (!v) return;
-                  const req = v.requestFullscreen || (v as unknown as { webkitEnterFullscreen?: () => void }).webkitEnterFullscreen;
-                  if (req) req.call(v);
-                }}
-                className="absolute top-4 right-16 z-20 text-[10px] tracking-[0.4em] uppercase text-cream/80 hover:text-cream border border-cream/40 px-3 py-1.5 rounded-sm bg-ink/50 backdrop-blur-sm"
-                data-cursor="hover"
-              >
-                Fullscreen ⤢
-              </button>
+              
               
             </>
           ) : (
