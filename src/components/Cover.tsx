@@ -12,7 +12,7 @@ export const Cover = () => {
   const photoY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-cream" style={{ minHeight: "140vh" }}>
+    <section ref={ref} className="relative min-h-screen overflow-hidden bg-cream">
       {/* background portrait */}
       <motion.div style={{ y: photoY }} className="absolute inset-0 z-0">
         <motion.img
@@ -25,7 +25,7 @@ export const Cover = () => {
           style={{ objectPosition: "60% center", filter: "sepia(0.05) saturate(1.05) contrast(1.1) brightness(0.85)" }}
         />
         <div className="absolute inset-0" style={{
-          background: "linear-gradient(180deg, hsl(var(--ink)/0.3) 0%, transparent 20%, transparent 70%, hsl(var(--ink)/0.5) 100%)"
+          background: "linear-gradient(180deg, hsl(var(--ink)/0.4) 0%, transparent 25%, transparent 65%, hsl(var(--ink)/0.7) 100%)"
         }} />
         <div className="absolute inset-0 grain opacity-40 pointer-events-none" />
       </motion.div>
@@ -37,11 +37,14 @@ export const Cover = () => {
         <span>VI · VI · MMXXVI</span>
       </div>
 
-      <motion.div style={{ y, opacity: op, minHeight: "140vh", paddingTop: "10vh", paddingBottom: "10vh" }} className="relative z-10 flex flex-col items-center justify-center px-6">
+      <motion.div
+        style={{ y, opacity: op }}
+        className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-20 pb-24"
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 1 }}
-          className="text-[11px] tracking-[0.5em] uppercase text-burgundy mb-6"
+          className="text-[11px] tracking-[0.5em] uppercase text-cream/80 mb-4"
         >The woman of the year · turning seventeen</motion.div>
 
         {/* MAITHILI */}
@@ -76,18 +79,18 @@ export const Cover = () => {
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }}
           transition={{ delay: 1.6, duration: 1 }}
-          className="hairline-gold w-40 my-8"
+          className="hairline-gold w-40 my-6"
         />
 
         <motion.p
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8, duration: 1 }}
-          className="font-serif2 italic text-xl md:text-2xl text-cream text-center max-w-xl"
-          style={{ textShadow: "0 1px 20px hsl(var(--cream))" }}
+          className="font-serif2 italic text-2xl md:text-3xl text-cream text-center max-w-2xl"
+          style={{ textShadow: "0 2px 20px hsl(var(--ink)/0.5)" }}
         >
           One hundred reasons, a thousand mornings, and<br className="hidden md:block"/> a forever already in motion.
         </motion.p>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl text-center">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl text-center">
           {[
             { tag: "Cover Story", t: "The Woman, The Myth" },
             { tag: "Exclusive", t: "A Letter, Just For You" },
@@ -100,7 +103,7 @@ export const Cover = () => {
               className="backdrop-blur-[2px]"
             >
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">{c.tag}</div>
-              <div className="font-display text-lg italic text-ink">{c.t}</div>
+              <div className="font-display text-lg italic text-cream">{c.t}</div>
             </motion.div>
           ))}
         </div>
@@ -108,10 +111,10 @@ export const Cover = () => {
 
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.6, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-[10px] tracking-[0.4em] uppercase text-ink/60 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-[10px] tracking-[0.4em] uppercase text-cream/60 flex flex-col items-center gap-2"
       >
         <span>Turn the page</span>
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="h-8 w-px bg-ink/40" />
+        <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="h-8 w-px bg-cream/40" />
       </motion.div>
     </section>
   );
