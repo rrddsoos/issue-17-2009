@@ -253,7 +253,7 @@ export const LavenderGarden = () => {
 
         {bloomed.size >= COUNT && (
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none z-[200]">
             <p className="font-hand text-5xl md:text-6xl text-burgundy bg-paper/80 px-8 py-4 rounded-sm backdrop-blur-sm">
               a whole field — for you.
             </p>

@@ -36,7 +36,7 @@ export const Cover = () => {
       </motion.div>
 
       {/* masthead */}
-      <div className="absolute top-0 inset-x-0 z-20 flex items-baseline justify-between px-6 md:px-12 pt-6 text-[10px] tracking-[0.4em] uppercase text-ink/70 font-body">
+      <div className="absolute top-0 inset-x-0 z-20 flex items-baseline justify-between px-6 md:px-12 pt-6 text-[10px] tracking-[0.4em] uppercase text-ink font-body bg-gradient-to-b from-cream/60 to-transparent pb-8">
         <span>Issue 17 · The Birthday Edition</span>
         <span className="hidden md:inline">A Love Letter, Just For You</span>
         <span>VI · VI · MMXXVI</span>
@@ -87,8 +87,8 @@ export const Cover = () => {
 
         <motion.p
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8, duration: 1 }}
-          className="font-serif2 italic text-xl md:text-2xl text-ink/80 text-center max-w-xl"
-          style={{ textShadow: "0 1px 20px hsl(var(--cream))" }}
+          className="font-serif2 italic text-xl md:text-2xl text-ink text-center max-w-xl bg-cream/40 backdrop-blur-sm px-6 py-3 rounded-sm"
+          style={{ textShadow: "0 1px 12px hsl(var(--cream))" }}
         >
           One hundred reasons, a thousand mornings, and<br className="hidden md:block"/> a forever already in motion.
         </motion.p>
@@ -122,7 +122,7 @@ export const Cover = () => {
               key={i}
               initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2 + i * 0.15, duration: 0.8 }}
-              className="backdrop-blur-[2px]"
+              className="backdrop-blur-sm bg-cream/30 px-4 py-3 rounded-sm"
             >
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">{c.tag}</div>
               <div className="font-display text-lg italic text-ink">{c.t}</div>
