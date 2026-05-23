@@ -11,11 +11,20 @@ export const SmoothScroll = () => {
       smoothWheel: true,
       smoothTouch: true,
       syncTouch: true,
+      infinite: false,
     });
     let raf = 0;
     const loop = (time: number) => { lenis.raf(time); raf = requestAnimationFrame(loop); };
     raf = requestAnimationFrame(loop);
-    return () => { cancelAnimationFrame(raf); lenis.destroy(); };
+
+    // Force lenis to recalculate scroll height after page fully loads
+    window.addEventListener("load", () => lenis.resize());
+
+    return () => {
+      cancelAnimationFrame(raf);
+      lenis.destroy();
+      window.removeEventListener("load", () => lenis.resize());
+    };
   }, []);
   return null;
 };
