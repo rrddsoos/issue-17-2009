@@ -2,7 +2,7 @@ import { useRef, useState, forwardRef, ReactNode, useEffect } from "react";
 import HTMLFlipBook from "react-pageflip";
 import { motion } from "framer-motion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import magazineBg from "@/assets/magazine-bg.JPG";
+import magazineBg from "@/assets/magazine-bg.jpg";
 
 const HERO_VIDEO_SRC = `${import.meta.env.BASE_URL}media/reels/cover-story.mp4`;
 const HERO_VIDEO_POSTER = `${import.meta.env.BASE_URL}media/reels/cover-story-poster.jpg`;
@@ -180,7 +180,7 @@ export const Magazine = () => {
           viewport={{ once: true }} transition={{ duration: 0.9 }}
           style={{ filter: "drop-shadow(0 30px 60px hsl(var(--ink) / 0.25))" }}
         >
-          {/* @ts-expect-error - lib types are loose */}
+          
           <HTMLFlipBook
             width={820} height={1100} size="stretch" minWidth={420} maxWidth={980}
             minHeight={600} maxHeight={1280} maxShadowOpacity={0.4} showCover
