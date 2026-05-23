@@ -17,13 +17,17 @@ export const SmoothScroll = () => {
     const loop = (time: number) => { lenis.raf(time); raf = requestAnimationFrame(loop); };
     raf = requestAnimationFrame(loop);
 
-    // Force lenis to recalculate scroll height after page fully loads
-    window.addEventListener("load", () => lenis.resize());
+    const resize = () => lenis.resize();
+    window.addEventListener("load", resize);
+    document.addEventListener("DOMContentLoaded", resize);
+    setTimeout(resize, 1000);
+    setTimeout(resize, 3000);
 
     return () => {
       cancelAnimationFrame(raf);
       lenis.destroy();
-      window.removeEventListener("load", () => lenis.resize());
+      window.removeEventListener("load", resize);
+      document.removeEventListener("DOMContentLoaded", resize);
     };
   }, []);
   return null;
