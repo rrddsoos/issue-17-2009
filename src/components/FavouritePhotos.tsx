@@ -46,14 +46,9 @@ const RevealCard = ({ src, caption, index }: { src: string; caption: string; ind
           >
             <div className="absolute inset-0 grain opacity-40 pointer-events-none" />
             <div className="relative z-10 flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-full border border-gold-deep/60 flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--gold-deep))" strokeWidth="1.5">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                  <circle cx="12" cy="12" r="3"/>
-                </svg>
-              </div>
-              <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep/80">Tap to reveal</div>
-            </div>
+  <div className="font-display text-2xl gold-foil italic">Tap to reveal</div>
+  <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep/60">✦</div>
+</div>
           </motion.div>
         )}
       </AnimatePresence>

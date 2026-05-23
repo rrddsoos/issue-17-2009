@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -10,6 +10,7 @@ export const Gate = ({ children }: { children: React.ReactNode }) => {
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
   const [shake, setShake] = useState(0);
+  const silentRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -19,9 +20,23 @@ export const Gate = ({ children }: { children: React.ReactNode }) => {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Unlock iOS audio context on first touch
+  const unlockAudio = () => {
+    if (!silentRef.current) {
+      const ctx = new AudioContext();
+      const buf = ctx.createBuffer(1, 1, 22050);
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.connect(ctx.destination);
+      src.start(0);
+      silentRef.current = ctx;
+    }
+  };
+
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     if (!pass.trim()) return;
+    unlockAudio();
     setBusy(true); setErr("");
     try {
       const { data, error } = await supabase.functions.invoke("verify-passcode", { body: { passcode: pass } });
@@ -29,7 +44,7 @@ export const Gate = ({ children }: { children: React.ReactNode }) => {
       if (data?.ok) {
         sessionStorage.setItem(TOKEN_KEY, data.token);
         setUnlocked(true);
-        window.dispatchEvent(new CustomEvent("start-music"));
+        setTimeout(() => window.dispatchEvent(new CustomEvent("start-music")), 300);
       } else {
         setErr("Not quite. Try again.");
         setShake((s) => s + 1);
@@ -74,13 +89,16 @@ export const Gate = ({ children }: { children: React.ReactNode }) => {
                     type="password"
                     value={pass}
                     onChange={(e) => setPass(e.target.value)}
+                    onTouchStart={unlockAudio}
                     autoFocus
                     placeholder="• • • • • •"
                     className="w-full text-center font-display text-2xl tracking-[0.3em] bg-transparent border-b border-ink/40 focus:border-burgundy outline-none py-3 placeholder:text-ink/20"
                     data-cursor="hover"
                   />
                   <button
-                    type="submit" disabled={busy}
+                    type="submit"
+                    disabled={busy}
+                    onTouchStart={unlockAudio}
                     className="mt-3 px-8 py-3 border border-ink text-[11px] tracking-[0.3em] uppercase hover:bg-ink hover:text-cream transition-colors disabled:opacity-50"
                     data-cursor="hover"
                   >
