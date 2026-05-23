@@ -3,7 +3,6 @@ import { useRef } from "react";
 import maithiliCover from "@/assets/maithili-cover.jpg";
 
 const NAME = "MAITHILI";
-const NICKNAMES = ["baby", "bachha", "madam ji"];
 
 export const Cover = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -13,12 +12,9 @@ export const Cover = () => {
   const photoY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
-    <section ref={ref} className="relative min-h-screen overflow-hidden bg-cream">
-      {/* background portrait, faded into cream */}
-      <motion.div
-        style={{ y: photoY }}
-        className="absolute inset-0 z-0"
-      >
+    <section ref={ref} className="relative overflow-hidden bg-cream" style={{ minHeight: "140vh" }}>
+      {/* background portrait */}
+      <motion.div style={{ y: photoY }} className="absolute inset-0 z-0">
         <motion.img
           src={maithiliCover}
           alt="Maithili"
@@ -28,7 +24,6 @@ export const Cover = () => {
           className="absolute inset-0 w-full h-full object-cover object-center"
           style={{ filter: "sepia(0.05) saturate(1.05) contrast(1.05) brightness(1.02)" }}
         />
-        {/* subtle cream fades only at top/bottom edges so the portrait stays visible */}
         <div className="absolute inset-0" style={{
           background: "linear-gradient(180deg, hsl(var(--cream)/0.5) 0%, transparent 18%, transparent 82%, hsl(var(--cream)/0.7) 100%)"
         }} />
@@ -36,20 +31,20 @@ export const Cover = () => {
       </motion.div>
 
       {/* masthead */}
-      <div className="absolute top-0 inset-x-0 z-20 flex items-baseline justify-between px-6 md:px-12 pt-6 text-[10px] tracking-[0.4em] uppercase text-ink font-body bg-gradient-to-b from-cream/60 to-transparent pb-8">
+      <div className="absolute top-0 inset-x-0 z-20 flex items-baseline justify-between px-6 md:px-12 pt-6 text-[10px] tracking-[0.4em] uppercase text-ink/70 font-body">
         <span>Issue 17 · The Birthday Edition</span>
         <span className="hidden md:inline">A Love Letter, Just For You</span>
         <span>VI · VI · MMXXVI</span>
       </div>
 
-      <motion.div style={{ y, opacity: op }} className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
+      <motion.div style={{ y, opacity: op, minHeight: "140vh", paddingTop: "10vh", paddingBottom: "10vh" }} className="relative z-10 flex flex-col items-center justify-center px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 1 }}
           className="text-[11px] tracking-[0.5em] uppercase text-burgundy mb-6"
         >The woman of the year · turning seventeen</motion.div>
 
-        {/* MAITHILI — image-clipped letters with a solid ink layer behind for legibility */}
+        {/* MAITHILI */}
         <div className="relative">
           <h1 aria-hidden className="absolute inset-0 font-display text-[18vw] md:text-[14vw] leading-[0.85] text-center select-none text-ink/90">
             {NAME}
@@ -78,7 +73,6 @@ export const Cover = () => {
           </h1>
         </div>
 
-
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }}
           transition={{ delay: 1.6, duration: 1 }}
@@ -87,30 +81,11 @@ export const Cover = () => {
 
         <motion.p
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8, duration: 1 }}
-          className="font-serif2 italic text-xl md:text-2xl text-ink text-center max-w-xl bg-cream/40 backdrop-blur-sm px-6 py-3 rounded-sm"
-          style={{ textShadow: "0 1px 12px hsl(var(--cream))" }}
+          className="font-serif2 italic text-xl md:text-2xl text-ink/80 text-center max-w-xl"
+          style={{ textShadow: "0 1px 20px hsl(var(--cream))" }}
         >
           One hundred reasons, a thousand mornings, and<br className="hidden md:block"/> a forever already in motion.
         </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2, duration: 1 }}
-          className="mt-6 h-6 relative w-64 text-center overflow-hidden"
-        >
-          {NICKNAMES.map((n, i) => (
-            <motion.span
-              key={n}
-              className="absolute inset-0 font-hand text-2xl text-burgundy"
-              animate={{ opacity: [0, 1, 1, 0], y: [10, 0, 0, -10] }}
-              transition={{
-                duration: NICKNAMES.length * 2.4,
-                times: [i / NICKNAMES.length, (i + 0.15) / NICKNAMES.length, (i + 0.85) / NICKNAMES.length, (i + 1) / NICKNAMES.length],
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >— {n} —</motion.span>
-          ))}
-        </motion.div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl text-center">
           {[
@@ -122,7 +97,7 @@ export const Cover = () => {
               key={i}
               initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2 + i * 0.15, duration: 0.8 }}
-              className="backdrop-blur-sm bg-cream/30 px-4 py-3 rounded-sm"
+              className="backdrop-blur-[2px]"
             >
               <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">{c.tag}</div>
               <div className="font-display text-lg italic text-ink">{c.t}</div>
