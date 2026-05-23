@@ -165,7 +165,7 @@ export const Magazine = () => {
           viewport={{ once: true }} transition={{ duration: 0.9 }}
           style={{ filter: "drop-shadow(0 30px 60px hsl(var(--ink) / 0.25))" }}
         >
-          {/* @ts-expect-error - lib types are loose */}
+          
           <HTMLFlipBook
             width={820} height={1100} size="stretch" minWidth={420} maxWidth={980}
             minHeight={600} maxHeight={1280} maxShadowOpacity={0.4} showCover
