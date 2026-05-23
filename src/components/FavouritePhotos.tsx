@@ -59,7 +59,7 @@ const RevealCard = ({ src, caption, index }: { src: string; caption: string; ind
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="absolute bottom-2 left-0 right-0 text-center font-hand text-base text-ink/70"
+          className="absolute bottom-2 left-0 right-0 text-center font-hand text-lg text-cream bg-ink/50 backdrop-blur-sm py-1"
         >
           {caption}
         </motion.div>
