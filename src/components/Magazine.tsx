@@ -280,7 +280,7 @@ export const Magazine = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.9 }}
-          className="bg-ink text-cream p-10 polaroid border border-gold-deep/20"
+          className="!bg-ink text-cream p-10 polaroid border border-gold-deep/20"
         >
           <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep mb-2">For Maithili — 06 · 06</div>
           <h2 className="font-display text-4xl leading-[0.9] mb-4">For <em className="gold-foil">her</em>,<br/>and her alone.</h2>
