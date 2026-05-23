@@ -8,6 +8,7 @@ import { MemoryTimeline } from "@/components/MemoryTimeline";
 import { Magazine } from "@/components/Magazine";
 import { LavenderGarden } from "@/components/LavenderGarden";
 import { MemoryWall } from "@/components/MemoryWall";
+import { FavouritePhotos } from "@/components/FavouritePhotos";
 import { Letter } from "@/components/Letter";
 import { Countdown } from "@/components/Countdown";
 import { Fireworks } from "@/components/Fireworks";
@@ -27,6 +28,7 @@ const Index = () => {
           <MemoryTimeline />
           <Magazine />
           <MemoryWall />
+          <FavouritePhotos />
           <LavenderGarden />
           <Letter />
           <Countdown />
