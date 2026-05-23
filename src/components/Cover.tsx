@@ -21,17 +21,17 @@ export const Cover = () => {
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.6, ease: [0.2, 0.8, 0.2, 1] }}
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          style={{ filter: "sepia(0.05) saturate(1.05) contrast(1.05) brightness(1.02)" }}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: "60% center", filter: "sepia(0.05) saturate(1.05) contrast(1.1) brightness(0.85)" }}
         />
         <div className="absolute inset-0" style={{
-          background: "linear-gradient(180deg, hsl(var(--cream)/0.5) 0%, transparent 18%, transparent 82%, hsl(var(--cream)/0.7) 100%)"
+          background: "linear-gradient(180deg, hsl(var(--ink)/0.3) 0%, transparent 20%, transparent 70%, hsl(var(--ink)/0.5) 100%)"
         }} />
         <div className="absolute inset-0 grain opacity-40 pointer-events-none" />
       </motion.div>
 
       {/* masthead */}
-      <div className="absolute top-0 inset-x-0 z-20 flex items-baseline justify-between px-6 md:px-12 pt-6 text-[10px] tracking-[0.4em] uppercase text-ink/70 font-body">
+      <div className="absolute top-0 inset-x-0 z-20 flex items-baseline justify-between px-6 md:px-12 pt-6 text-[10px] tracking-[0.4em] uppercase text-cream/80 font-body">
         <span>Issue 17 · The Birthday Edition</span>
         <span className="hidden md:inline">A Love Letter, Just For You</span>
         <span>VI · VI · MMXXVI</span>
@@ -81,7 +81,7 @@ export const Cover = () => {
 
         <motion.p
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8, duration: 1 }}
-          className="font-serif2 italic text-xl md:text-2xl text-ink/80 text-center max-w-xl"
+          className="font-serif2 italic text-xl md:text-2xl text-cream text-center max-w-xl"
           style={{ textShadow: "0 1px 20px hsl(var(--cream))" }}
         >
           One hundred reasons, a thousand mornings, and<br className="hidden md:block"/> a forever already in motion.
