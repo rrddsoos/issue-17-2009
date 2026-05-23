@@ -31,10 +31,10 @@ export const Cover = () => {
       </motion.div>
 
       {/* masthead */}
-      <div className="absolute top-0 inset-x-0 z-20 flex items-baseline justify-between px-6 md:px-12 pt-6 text-[10px] tracking-[0.4em] uppercase text-cream/80 font-body">
+      <div className="absolute top-0 inset-x-0 z-20 grid grid-cols-3 items-baseline px-6 md:px-12 pt-6 text-[10px] tracking-[0.4em] uppercase text-cream/80 font-body">
         <span>Issue 17 · The Birthday Edition</span>
-        <span className="hidden md:inline">A Love Letter, Just For You</span>
-        <span>VI · VI · MMXXVI</span>
+        <span className="hidden md:inline text-center">A Special Issue, Just For You</span>
+        <span className="text-right">VI · VI · MMXXVI</span>
       </div>
 
       <motion.div
