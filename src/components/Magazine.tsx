@@ -180,7 +180,6 @@ export const Magazine = () => {
           viewport={{ once: true }} transition={{ duration: 0.9 }}
           style={{ filter: "drop-shadow(0 30px 60px hsl(var(--ink) / 0.25))" }}
         >
-          
           <HTMLFlipBook
             width={820} height={1100} size="stretch" minWidth={420} maxWidth={980}
             minHeight={600} maxHeight={1280} maxShadowOpacity={0.4} showCover
@@ -199,6 +198,7 @@ export const Magazine = () => {
                 <li className="flex justify-between"><span>The Interview</span><span className="text-ink/40">10</span></li>
                 <li className="flex justify-between"><span>Style File</span><span className="text-ink/40">14</span></li>
                 <li className="flex justify-between"><span>From Him</span><span className="text-ink/40">20</span></li>
+                <li className="flex justify-between"><span>POV: Model</span><span className="text-ink/40">22</span></li>
               </ol>
               <div className="hairline-gold w-24 mt-10" />
               <p className="font-hand text-2xl text-burgundy mt-4">— Page through, slowly.</p>
@@ -254,8 +254,33 @@ export const Magazine = () => {
               <h2 className="font-display text-4xl italic mb-6">From him.</h2>
               <p className="font-serif2 text-base text-ink/60 italic">— A few lines, set in print, just for you.</p>
               <div className="mt-6 space-y-4 font-serif2 text-base text-ink/85">
-                <div className="border-l-2 border-gold pl-4 italic">"Happiest birthday to the kindest person I know." <span className="not-italic block text-sm text-ink/50 mt-1">— a friend, soon.</span></div>
-                <div className="border-l-2 border-gold pl-4 italic">"You make every room better." <span className="not-italic block text-sm text-ink/50 mt-1">— another, soon.</span></div>
+                <div className="border-l-2 border-gold pl-4 italic">"Happiest birthday beta." <span className="not-italic block text-sm text-ink/50 mt-1">— Father, soon.</span></div>
+                <div className="border-l-2 border-gold pl-4 italic">"You make every room better." <span className="not-italic block text-sm text-ink/50 mt-1">— husband, soon.</span></div>
+              </div>
+            </Page>
+
+            {/* NEW POV PAGE */}
+            <Page pageNum={8} side="R">
+              <div className="relative -m-10 md:-m-14 h-full overflow-hidden" style={{ margin: "-2.5rem", height: "calc(100% + 5rem)" }}>
+                <img
+                  src={`${import.meta.env.BASE_URL}media/magazine-pov.jpg`}
+                  alt="POV"
+                  className="absolute inset-0 w-full h-full object-cover object-top"
+                />
+                <div className="absolute inset-0" style={{
+                  background: "linear-gradient(180deg, transparent 35%, hsl(0 0% 0% / 0.88) 100%)"
+                }} />
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-cream">
+                  <div className="text-[9px] tracking-[0.4em] uppercase text-gold-deep/80 mb-2">Style · Exclusive</div>
+                  <h2 className="font-display text-3xl italic leading-[1.1] mb-3">
+                    POV — you are a model<br/>of your own league.
+                  </h2>
+                  <div className="hairline-gold w-16 my-3" />
+                  <p className="font-serif2 text-xs leading-relaxed text-cream/80 max-w-xs">
+                    She doesn't follow the brief. She is the brief. In a world of references and mood boards, Maithili arrives already edited — unfiltered, unhurried, entirely herself. Vogue calls it presence. We call it her.
+                  </p>
+                  <div className="text-[8px] tracking-[0.3em] uppercase text-cream/40 mt-3">08 · ICONIC SINCE 2009</div>
+                </div>
               </div>
             </Page>
 
@@ -290,6 +315,7 @@ export const Magazine = () => {
             <li>· The Interview</li>
             <li>· Style File</li>
             <li>· From Him</li>
+            <li>· POV: Model</li>
           </ul>
           <p className="font-serif2 italic text-cream/60 text-sm border-t border-cream/20 pt-4">
             Open on a desktop for the full flipbook experience ✦
