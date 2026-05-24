@@ -14,12 +14,8 @@ const HeroFilmPage = forwardRef<HTMLDivElement>((_, ref) => {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    if (open) {
-      v.currentTime = 0;
-      v.play().catch(() => {});
-    } else {
-      v.pause();
-    }
+    if (open) { v.currentTime = 0; v.play().catch(() => {}); }
+    else { v.pause(); }
   }, [open]);
 
   const goFullscreen = () => {
@@ -190,6 +186,7 @@ export const Magazine = () => {
             className="" style={{}} startPage={0} usePortrait autoSize={false} startZIndex={0} clickEventForward swipeDistance={30} showPageCorners disableFlipByClick={false}
           >
             <Cover />
+
             <Page pageNum={2} side="L">
               <div className="text-[10px] tracking-[0.4em] uppercase text-burgundy mb-3">Contents</div>
               <h2 className="font-display text-4xl mb-8">In this issue.</h2>
@@ -259,27 +256,37 @@ export const Magazine = () => {
               </div>
             </Page>
 
-            {/* NEW POV PAGE */}
+            {/* POV PAGE */}
             <Page pageNum={8} side="R">
-              <div className="relative -m-10 md:-m-14 h-full overflow-hidden" style={{ margin: "-2.5rem", height: "calc(100% + 5rem)" }}>
+              <div className="absolute inset-0 overflow-hidden">
                 <img
                   src={`${import.meta.env.BASE_URL}media/magazine-pov.jpg`}
                   alt="POV"
-                  className="absolute inset-0 w-full h-full object-cover object-top"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ objectPosition: "center 20%" }}
                 />
                 <div className="absolute inset-0" style={{
-                  background: "linear-gradient(180deg, transparent 35%, hsl(0 0% 0% / 0.88) 100%)"
+                  background: "linear-gradient(180deg, hsl(0 0% 0% / 0.45) 0%, transparent 25%, transparent 45%, hsl(0 0% 0% / 0.95) 100%)"
                 }} />
-                <div className="absolute bottom-0 left-0 right-0 p-8 text-cream">
-                  <div className="text-[9px] tracking-[0.4em] uppercase text-gold-deep/80 mb-2">Style · Exclusive</div>
-                  <h2 className="font-display text-3xl italic leading-[1.1] mb-3">
+                <div className="absolute inset-0 grain opacity-20 pointer-events-none" />
+
+                {/* VOGUE top label */}
+                <div className="absolute top-6 left-0 right-0 text-center">
+                  <div className="font-display text-5xl text-cream/95" style={{ letterSpacing: "0.15em" }}>VOGUE</div>
+                  <div className="text-[8px] tracking-[0.5em] uppercase text-gold-deep mt-1">Style · Exclusive · Issue 17</div>
+                </div>
+
+                {/* bottom text */}
+                <div className="absolute bottom-0 left-0 right-0 px-7 pb-7">
+                  <div className="hairline-gold w-12 mb-4" />
+                  <h2 className="font-display text-4xl italic leading-[1.0] text-cream mb-3">
                     POV — you are a model<br/>of your own league.
                   </h2>
-                  <div className="hairline-gold w-16 my-3" />
-                  <p className="font-serif2 text-xs leading-relaxed text-cream/80 max-w-xs">
+                  <div className="hairline-gold w-20 my-3" />
+                  <p className="font-serif2 text-sm leading-relaxed text-cream/90">
                     She doesn't follow the brief. She is the brief. In a world of references and mood boards, Maithili arrives already edited — unfiltered, unhurried, entirely herself. Vogue calls it presence. We call it her.
                   </p>
-                  <div className="text-[8px] tracking-[0.3em] uppercase text-cream/40 mt-3">08 · ICONIC SINCE 2009</div>
+                  <div className="text-[8px] tracking-[0.4em] uppercase text-gold-deep/60 mt-4">08 · ICONIC SINCE 2009</div>
                 </div>
               </div>
             </Page>
