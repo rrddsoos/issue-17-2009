@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { AnimatedHeading } from "@/components/AnimatedHeading";
+import { FadeIn, SlideInLeft, BlurIn } from "@/components/AnimatedText";
 
 const PHOTOS = [
   { src: `${import.meta.env.BASE_URL}media/fav-1.jpg`, caption: "always her." },
@@ -20,12 +22,11 @@ const RevealCard = ({ src, caption, index }: { src: string; caption: string; ind
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, delay: index * 0.15 }}
+      viewport={{ once: false, margin: "-60px" }}
+      transition={{ duration: 0.7, delay: index * 0.12 }}
       className="relative aspect-[3/4] bg-ink overflow-hidden polaroid !p-2 !pb-8 cursor-pointer"
       onClick={() => setRevealed(true)}
     >
-      {/* hidden image */}
       <AnimatePresence>
         {revealed ? (
           <motion.img
@@ -46,14 +47,13 @@ const RevealCard = ({ src, caption, index }: { src: string; caption: string; ind
           >
             <div className="absolute inset-0 grain opacity-40 pointer-events-none" />
             <div className="relative z-10 flex flex-col items-center gap-4">
-  <div className="font-display text-2xl gold-foil italic">Tap to reveal</div>
-  <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep/60">✦</div>
-</div>
+              <div className="font-display text-2xl gold-foil italic">Tap to reveal</div>
+              <div className="text-[10px] tracking-[0.4em] uppercase text-gold-deep/60">✦</div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* caption */}
       {revealed && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -80,8 +80,8 @@ const EnvelopeCard = () => {
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.9, delay: 0.6 }}
+      viewport={{ once: false, margin: "-60px" }}
+      transition={{ duration: 0.9, delay: 0.3 }}
       className="col-span-1 md:col-span-2 flex justify-center"
     >
       <div className="w-full max-w-md cursor-pointer" onClick={handleClick}>
@@ -94,7 +94,6 @@ const EnvelopeCard = () => {
               className="relative aspect-[4/3] bg-ink flex flex-col items-center justify-center gap-4 polaroid !p-6"
             >
               <div className="absolute inset-0 grain opacity-40 pointer-events-none" />
-              {/* envelope SVG */}
               <svg width="80" height="60" viewBox="0 0 80 60" className="relative z-10">
                 <rect x="2" y="10" width="76" height="48" rx="3" fill="none" stroke="hsl(var(--gold-deep))" strokeWidth="1.5"/>
                 <path d="M2 10 L40 38 L78 10" fill="none" stroke="hsl(var(--gold-deep))" strokeWidth="1.5"/>
@@ -118,10 +117,7 @@ const EnvelopeCard = () => {
               className="relative aspect-[4/3] bg-ink flex flex-col items-center justify-center gap-4 polaroid !p-6"
             >
               <div className="absolute inset-0 grain opacity-40 pointer-events-none" />
-              <motion.svg
-                width="80" height="60" viewBox="0 0 80 60"
-                className="relative z-10"
-              >
+              <motion.svg width="80" height="60" viewBox="0 0 80 60" className="relative z-10">
                 <rect x="2" y="10" width="76" height="48" rx="3" fill="none" stroke="hsl(var(--gold-deep))" strokeWidth="1.5"/>
                 <motion.path
                   d="M2 10 L40 38 L78 10"
@@ -176,20 +172,28 @@ export const FavouritePhotos = () => {
 
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9 }}
-          className="text-center mb-16"
-        >
-          <div className="text-[10px] tracking-[0.5em] uppercase text-gold-deep/70 mb-4">A Private Collection</div>
+        <div className="text-center mb-16">
+          <SlideInLeft className="text-[10px] tracking-[0.5em] uppercase text-gold-deep/70 mb-4 flex justify-center">
+            A Private Collection
+          </SlideInLeft>
+
           <h2 className="font-display text-5xl md:text-7xl leading-[0.95] gold-foil">
-            My favourite<br/><em className="italic">pictures of you.</em>
+            <AnimatedHeading text="My favourite pictures of you." delay={0.1} />
           </h2>
-          <div className="hairline-gold w-24 mx-auto mt-6" />
-          <p className="font-serif2 italic text-lg text-cream/50 mt-4">Each one, a moment I keep.</p>
-        </motion.div>
+
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: false, margin: "-10%" }}
+            style={{ originX: 0.5 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="hairline-gold w-24 mx-auto mt-6"
+          />
+
+          <BlurIn delay={0.6} className="font-serif2 italic text-lg text-cream/50 mt-4">
+            Each one, a moment I keep.
+          </BlurIn>
+        </div>
 
         {/* 4 reveal cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">

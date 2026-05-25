@@ -16,9 +16,9 @@ export const AnimatedHeading = ({ text, className = "", delay = 0 }: Props) => {
             className="inline-block"
             initial={{ y: "100%", opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, margin: "-10%" }}
             transition={{
-              delay: delay + i * 0.1,
+              delay: delay + i * 0.08,
               duration: 0.7,
               ease: [0.2, 0.8, 0.2, 1],
             }}

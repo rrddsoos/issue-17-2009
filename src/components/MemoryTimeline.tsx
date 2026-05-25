@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { AnimatedHeading } from "@/components/AnimatedHeading";
+import { FadeIn, SlideInLeft, BlurIn } from "@/components/AnimatedText";
 
 type Chapter = {
   tag: string;
@@ -26,27 +27,37 @@ export const MemoryTimeline = () => {
             <span>pp. 22 — 36</span>
           </div>
 
-          <div className="text-[10px] tracking-[0.5em] uppercase text-burgundy mb-4">The Memoir</div>
+          <SlideInLeft className="text-[10px] tracking-[0.5em] uppercase text-burgundy mb-4">
+            The Memoir
+          </SlideInLeft>
+
           <h2 className="font-display text-6xl md:text-8xl leading-[0.9] text-ink mb-6">
-  <AnimatedHeading text="Three chapters, one love." />
-</h2>
-          <p className="font-serif2 italic text-xl text-ink/70 max-w-md">
+            <AnimatedHeading text="Three chapters, one love." delay={0.1} />
+          </h2>
+
+          <FadeIn delay={0.4} className="font-serif2 italic text-xl text-ink/70 max-w-md">
             Scroll, slowly. Each frame is a moment we earned.
-          </p>
+          </FadeIn>
         </div>
 
-        {/* chapters — vertical stack */}
+        {/* chapters */}
         <div className="flex flex-col gap-24 md:gap-32">
           {memories.map((m, i) => (
             <motion.article
               key={i}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: false, margin: "-100px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex flex-col"
             >
-              <div className="relative aspect-[3/4] bg-cream-deep overflow-hidden polaroid">
+              <motion.div
+                className="relative aspect-[3/4] bg-cream-deep overflow-hidden polaroid"
+                initial={{ scale: 0.96, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: false, margin: "-80px" }}
+                transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
+              >
                 {m.type === "video" ? (
                   <video
                     src={m.src}
@@ -67,13 +78,27 @@ export const MemoryTimeline = () => {
                   />
                 )}
                 <div className="absolute bottom-3 left-3 right-3 font-hand text-2xl text-paper drop-shadow-lg">{m.title}</div>
-              </div>
-              <div className="mt-5 flex items-baseline gap-3">
+              </motion.div>
+
+              <motion.div
+                className="mt-5 flex items-baseline gap-3"
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                viewport={{ once: false }}
+                style={{ originX: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 <span className="text-[10px] tracking-[0.4em] uppercase text-gold-deep">{m.tag}</span>
                 <div className="hairline flex-1 opacity-30" />
-              </div>
-              <h3 className="font-display text-2xl italic mt-2 text-ink">{m.title}</h3>
-              <p className="font-serif2 text-lg text-ink/70 mt-1">{m.note}</p>
+              </motion.div>
+
+              <BlurIn delay={0.3}>
+                <h3 className="font-display text-2xl italic mt-2 text-ink">{m.title}</h3>
+              </BlurIn>
+
+              <FadeIn delay={0.4}>
+                <p className="font-serif2 text-lg text-ink/70 mt-1">{m.note}</p>
+              </FadeIn>
             </motion.article>
           ))}
         </div>
