@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const SEQUENCE = [
-  { text: "Happy 17th, Maithili.", delay: 0.2 },
-  { text: "Issue 17 · Vol. 1", delay: 1.4 },
-  { text: "For you, only.", delay: 2.4 },
+  { text: "Happy 17th, Maithili.", delay: 0.3 },
+  { text: "Issue 17 · Vol. 1", delay: 2.0 },
+  { text: "For you, only.", delay: 3.8 },
+  { text: "A Birthday Issue · MMXXVI", delay: 5.4 },
 ];
 
 const GoldParticles = () => {
@@ -24,12 +25,12 @@ const GoldParticles = () => {
     resize();
     window.addEventListener("resize", resize);
 
-    const particles = Array.from({ length: 60 }).map(() => ({
+    const particles = Array.from({ length: 70 }).map(() => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      size: 0.5 + Math.random() * 1.5,
+      size: 0.5 + Math.random() * 1.8,
       speedX: (Math.random() - 0.5) * 0.3,
-      speedY: -0.2 - Math.random() * 0.4,
+      speedY: -0.15 - Math.random() * 0.35,
       opacity: 0.1 + Math.random() * 0.5,
     }));
 
@@ -73,8 +74,8 @@ export const CinematicIntro = ({ onComplete }: { onComplete: () => void }) => {
     if (showFullscreenPrompt) return;
     const t = setTimeout(() => {
       setVisible(false);
-      setTimeout(onComplete, 1200);
-    }, 4200);
+      setTimeout(onComplete, 1400);
+    }, 8000);
     return () => clearTimeout(t);
   }, [showFullscreenPrompt, onComplete]);
 
@@ -83,7 +84,7 @@ export const CinematicIntro = ({ onComplete }: { onComplete: () => void }) => {
       {visible && (
         <motion.div
           className="fixed inset-0 z-[180] bg-ink flex items-center justify-center overflow-hidden"
-          exit={{ opacity: 0, transition: { duration: 1.2, ease: [0.7, 0, 0.3, 1] } }}
+          exit={{ opacity: 0, transition: { duration: 1.4, ease: [0.7, 0, 0.3, 1] } }}
         >
           <style>{`
             body { overflow: hidden !important; }
@@ -101,7 +102,7 @@ export const CinematicIntro = ({ onComplete }: { onComplete: () => void }) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.6 }}
-                className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-6 px-6 text-center"
+                className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center"
               >
                 <motion.div
                   initial={{ y: 20, opacity: 0 }}
@@ -128,17 +129,20 @@ export const CinematicIntro = ({ onComplete }: { onComplete: () => void }) => {
             )}
           </AnimatePresence>
 
-          {/* Cinematic text */}
+          {/* Cinematic sequence */}
           {!showFullscreenPrompt && (
             <>
+              {/* top hairline */}
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-                className="absolute top-12 left-1/2 -translate-x-1/2 w-32 hairline-gold origin-center"
+                transition={{ duration: 2, ease: "easeInOut" }}
+                className="absolute top-12 w-32 hairline-gold"
+                style={{ left: "50%", transform: "translateX(-50%)", transformOrigin: "center" }}
               />
 
-              <div className="relative z-10 text-center px-6 flex flex-col items-center gap-2 w-full">
+              {/* text lines */}
+              <div className="relative z-10 text-center px-6 flex flex-col items-center gap-4 w-full">
                 {SEQUENCE.map((line, i) => (
                   <div key={i} className="overflow-hidden w-full text-center">
                     <motion.div
@@ -146,13 +150,17 @@ export const CinematicIntro = ({ onComplete }: { onComplete: () => void }) => {
                       animate={{ y: 0, opacity: 1 }}
                       transition={{
                         delay: line.delay,
-                        duration: 0.9,
+                        duration: 1.0,
                         ease: [0.2, 0.8, 0.2, 1],
                       }}
                       className={`font-display italic text-center ${
-                        i === 0 ? "text-3xl md:text-5xl gold-foil" :
-                        i === 1 ? "text-lg md:text-2xl text-gold-deep tracking-[0.2em]" :
-                        "text-2xl md:text-4xl text-cream/80"
+                        i === 0
+                          ? "text-3xl md:text-6xl gold-foil"
+                          : i === 1
+                          ? "text-lg md:text-2xl text-gold-deep tracking-[0.25em]"
+                          : i === 2
+                          ? "text-2xl md:text-4xl text-cream/80"
+                          : "text-[10px] tracking-[0.5em] uppercase text-gold-deep/50 not-italic"
                       }`}
                     >
                       {line.text}
@@ -163,25 +171,18 @@ export const CinematicIntro = ({ onComplete }: { onComplete: () => void }) => {
                 <motion.div
                   initial={{ scaleX: 0, opacity: 0 }}
                   animate={{ scaleX: 1, opacity: 1 }}
-                  transition={{ delay: 3.0, duration: 0.8 }}
-                  className="hairline-gold w-24 mt-4"
+                  transition={{ delay: 4.8, duration: 1 }}
+                  className="hairline-gold w-24 mt-2"
                 />
-
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 3.3, duration: 0.6 }}
-                  className="text-[9px] tracking-[0.5em] uppercase text-gold-deep/60 mt-2"
-                >
-                  A Birthday Issue · MMXXVI
-                </motion.div>
               </div>
 
+              {/* bottom hairline */}
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-                className="absolute bottom-12 left-1/2 -translate-x-1/2 w-32 hairline-gold origin-center"
+                transition={{ duration: 2, ease: "easeInOut" }}
+                className="absolute bottom-12 w-32 hairline-gold"
+                style={{ left: "50%", transform: "translateX(-50%)", transformOrigin: "center" }}
               />
             </>
           )}
