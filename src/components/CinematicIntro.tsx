@@ -60,14 +60,23 @@ const GoldParticles = () => {
 
 export const CinematicIntro = ({ onComplete }: { onComplete: () => void }) => {
   const [visible, setVisible] = useState(true);
+  const [showFullscreenPrompt, setShowFullscreenPrompt] = useState(true);
+
+  const enterFullscreen = () => {
+    const el = document.documentElement;
+    if (el.requestFullscreen) el.requestFullscreen();
+    else if ((el as any).webkitRequestFullscreen) (el as any).webkitRequestFullscreen();
+    setShowFullscreenPrompt(false);
+  };
 
   useEffect(() => {
+    if (showFullscreenPrompt) return;
     const t = setTimeout(() => {
       setVisible(false);
       setTimeout(onComplete, 1200);
-    }, 4000);
+    }, 4200);
     return () => clearTimeout(t);
-  }, [onComplete]);
+  }, [showFullscreenPrompt, onComplete]);
 
   return (
     <AnimatePresence>
@@ -76,64 +85,106 @@ export const CinematicIntro = ({ onComplete }: { onComplete: () => void }) => {
           className="fixed inset-0 z-[180] bg-ink flex items-center justify-center overflow-hidden"
           exit={{ opacity: 0, transition: { duration: 1.2, ease: [0.7, 0, 0.3, 1] } }}
         >
+          <style>{`
+            body { overflow: hidden !important; }
+            ::-webkit-scrollbar { display: none !important; }
+          `}</style>
+
           <div className="absolute inset-0 grain opacity-30 pointer-events-none" />
           <GoldParticles />
 
-          {/* hairline top */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute top-12 left-1/2 -translate-x-1/2 w-32 hairline-gold origin-center"
-          />
-
-          {/* text sequence */}
-          <div className="relative z-10 text-center px-6 flex flex-col items-center gap-2">
-            {SEQUENCE.map((line, i) => (
-              <div key={i} className="overflow-hidden">
+          {/* Fullscreen prompt */}
+          <AnimatePresence>
+            {showFullscreenPrompt && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-6 px-6 text-center"
+              >
                 <motion.div
-                  initial={{ y: "100%", opacity: 0 }}
+                  initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{
-                    delay: line.delay,
-                    duration: 0.9,
-                    ease: [0.2, 0.8, 0.2, 1],
-                  }}
-                  className={`font-display italic text-cream ${
-                    i === 0 ? "text-3xl md:text-5xl gold-foil" :
-                    i === 1 ? "text-lg md:text-2xl text-gold-deep tracking-[0.2em]" :
-                    "text-2xl md:text-4xl text-cream/80"
-                  }`}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                  className="flex flex-col items-center"
                 >
-                  {line.text}
+                  <div className="text-[10px] tracking-[0.5em] uppercase text-gold-deep mb-6">For the best experience</div>
+                  <h2 className="font-display text-3xl md:text-5xl italic text-cream mb-4">
+                    Open in fullscreen.
+                  </h2>
+                  <div className="hairline-gold w-24 mx-auto my-5" />
+                  <p className="font-serif2 italic text-cream/60 text-base mb-8">
+                    This issue was made to be experienced fully.
+                  </p>
+                  <button
+                    onClick={enterFullscreen}
+                    className="px-10 py-4 border border-gold-deep text-gold-deep text-[11px] tracking-[0.3em] uppercase hover:bg-gold-deep hover:text-ink transition-colors"
+                  >
+                    Enter Fullscreen ⤢
+                  </button>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Cinematic text */}
+          {!showFullscreenPrompt && (
+            <>
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="absolute top-12 left-1/2 -translate-x-1/2 w-32 hairline-gold origin-center"
+              />
+
+              <div className="relative z-10 text-center px-6 flex flex-col items-center gap-2 w-full">
+                {SEQUENCE.map((line, i) => (
+                  <div key={i} className="overflow-hidden w-full text-center">
+                    <motion.div
+                      initial={{ y: "100%", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        delay: line.delay,
+                        duration: 0.9,
+                        ease: [0.2, 0.8, 0.2, 1],
+                      }}
+                      className={`font-display italic text-center ${
+                        i === 0 ? "text-3xl md:text-5xl gold-foil" :
+                        i === 1 ? "text-lg md:text-2xl text-gold-deep tracking-[0.2em]" :
+                        "text-2xl md:text-4xl text-cream/80"
+                      }`}
+                    >
+                      {line.text}
+                    </motion.div>
+                  </div>
+                ))}
+
+                <motion.div
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={{ scaleX: 1, opacity: 1 }}
+                  transition={{ delay: 3.0, duration: 0.8 }}
+                  className="hairline-gold w-24 mt-4"
+                />
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 3.3, duration: 0.6 }}
+                  className="text-[9px] tracking-[0.5em] uppercase text-gold-deep/60 mt-2"
+                >
+                  A Birthday Issue · MMXXVI
                 </motion.div>
               </div>
-            ))}
 
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ delay: 3.0, duration: 0.8 }}
-              className="hairline-gold w-24 mt-4"
-            />
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 3.3, duration: 0.6 }}
-              className="text-[9px] tracking-[0.5em] uppercase text-gold-deep/60 mt-2"
-            >
-              A Birthday Issue · MMXXVI
-            </motion.div>
-          </div>
-
-          {/* hairline bottom */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 w-32 hairline-gold origin-center"
-          />
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="absolute bottom-12 left-1/2 -translate-x-1/2 w-32 hairline-gold origin-center"
+              />
+            </>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
