@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { AnimatedHeading } from "@/components/AnimatedHeading";
 
 type Chapter = {
   tag: string;
@@ -27,8 +28,8 @@ export const MemoryTimeline = () => {
 
           <div className="text-[10px] tracking-[0.5em] uppercase text-burgundy mb-4">The Memoir</div>
           <h2 className="font-display text-6xl md:text-8xl leading-[0.9] text-ink mb-6">
-            Three chapters,<br/><em className="font-serif2 italic">one love.</em>
-          </h2>
+  <AnimatedHeading text="Three chapters, one love." />
+</h2>
           <p className="font-serif2 italic text-xl text-ink/70 max-w-md">
             Scroll, slowly. Each frame is a moment we earned.
           </p>

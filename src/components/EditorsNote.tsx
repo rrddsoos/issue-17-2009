@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import editorsBg from "@/assets/editors-note-bg.jpg";
-
+import { AnimatedHeading } from "@/components/AnimatedHeading";
 export const EditorsNote = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
@@ -27,13 +27,9 @@ export const EditorsNote = () => {
             className="text-[10px] tracking-[0.5em] uppercase text-gold-deep mb-4"
           >Editor's Note · pp. 04</motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1 }}
-            className="font-display text-4xl md:text-6xl leading-[1.05] text-cream mb-10"
-          >
-            A few words, before<br/><em className="font-serif2">you turn the page.</em>
-          </motion.h2>
+          <h2 className="font-display text-4xl md:text-6xl leading-[1.05] text-cream mb-10">
+  <AnimatedHeading text="A few words, before you turn the page." delay={0.1} />
+</h2>
 
           <motion.p
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
