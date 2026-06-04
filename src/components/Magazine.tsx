@@ -64,7 +64,7 @@ const HeroFilmPage = forwardRef<HTMLDivElement>((_, ref) => {
            type="button"
            onClick={() => setOpen(false)}
            className="absolute top-4 left-4 z-20 text-[10px] tracking-[0.4em] uppercase text-cream/80 hover:text-cream border border-cream/40 px-3 py-1.5 rounded-sm bg-ink/50 backdrop-blur-sm"
-           >
+          >
            ✕ Close
           </button>
           <video

@@ -49,7 +49,7 @@ export const MemoryWall = ({ videos = defaultReels }: { videos?: Reel[] }) => {
               initial={{ opacity: 0, y: 30, rotate: 0 }}
               whileInView={{ opacity: 1, y: 0, rotate: tilts[i % tilts.length] }}
               whileHover={{ rotate: 0, scale: 1.03 }}
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: false, margin: "-80px" }}
               transition={{ duration: 0.7, delay: i * 0.06 }}
               className="polaroid !p-3 !pb-10 text-left group"
               style={{ cursor: v.src ? "pointer" : "default" }}
@@ -70,7 +70,6 @@ export const MemoryWall = ({ videos = defaultReels }: { videos?: Reel[] }) => {
                 </div>
                 <div className="absolute top-2 left-2 text-[8px] tracking-[0.4em] uppercase text-cream/70">Reel No. {String(i + 1).padStart(2, "0")}</div>
               </div>
-              
             </motion.button>
           ))}
         </div>
@@ -92,8 +91,13 @@ export const MemoryWall = ({ videos = defaultReels }: { videos?: Reel[] }) => {
                 playsInline
                 className="relative z-10 w-full h-full object-contain bg-ink"
               />
-              
-              
+              <button
+                type="button"
+                onClick={() => setOpen(null)}
+                className="absolute top-4 left-4 z-20 text-[10px] tracking-[0.4em] uppercase text-cream/80 hover:text-cream border border-cream/40 px-3 py-1.5 rounded-sm bg-ink/50 backdrop-blur-sm"
+              >
+                ✕ Close
+              </button>
             </>
           ) : (
             <div className="aspect-video flex items-center justify-center text-cream/60 font-serif2 italic">Reel coming soon.</div>
