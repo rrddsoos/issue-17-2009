@@ -60,6 +60,13 @@ const HeroFilmPage = forwardRef<HTMLDivElement>((_, ref) => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-none w-screen h-screen sm:rounded-none bg-ink border-0 p-0 overflow-hidden flex items-center justify-center">
           <div className="absolute inset-0 grain opacity-25 pointer-events-none" />
+          <button
+           type="button"
+           onClick={() => setOpen(false)}
+           className="absolute top-4 left-4 z-20 text-[10px] tracking-[0.4em] uppercase text-cream/80 hover:text-cream border border-cream/40 px-3 py-1.5 rounded-sm bg-ink/50 backdrop-blur-sm"
+           >
+           ✕ Close
+          </button>
           <video
             ref={videoRef}
             src={HERO_VIDEO_SRC}
